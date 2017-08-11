@@ -122,7 +122,7 @@ email_body += "market vol = ${:5.2f}B = {:5.2f}B gbp (in the last 24h)\n".format
 email_body += "\n"
 
 ########################### add new coins here #################################
-amountPaidForAllCryptoGbp = float(1664.74+294.19)
+amountPaidForAllCryptoGbp = float(598.42+3030)
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
             "abs":float(1.60197267), 
@@ -151,24 +151,40 @@ neoDict = { "ticker":"neo",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0)}
-get_price_from_cmc(btcDict, cable)
-get_price_from_cmc(ethDict, cable)
-get_price_from_cmc(bchDict, cable)
-get_price_from_cmc(neoDict, cable)
+omgDict = { "ticker":"omisego",
+            "symbol":"omg",
+            "abs":float(171.546878),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0)}
+iotaDict = { "ticker":"iota",
+            "symbol":"miota",
+            "abs":float(1588.00),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0)}
+get_price_from_cmc(btcDict,  cable)
+get_price_from_cmc(ethDict,  cable)
+get_price_from_cmc(bchDict,  cable)
+get_price_from_cmc(neoDict,  cable)
+get_price_from_cmc(omgDict,  cable)
+get_price_from_cmc(iotaDict, cable)
 # create an array of crypto dictionaries
-arr = [btcDict, ethDict, bchDict, neoDict]
+arr = [btcDict, ethDict, bchDict, neoDict, omgDict, iotaDict]
 
 # loop through the array of dictionaries
 totalUsd = float(0)
 totalGbp = float(0)
 for x in arr:
-    email_body += "{} price = ${:7.2f} = {:7.2f} gbp\n".format(x["symbol"], x["usd"], x["gbp"])
+    email_body += "{:5} price = ${:7.2f} = {:7.2f} gbp\n".format(x["symbol"], x["usd"], x["gbp"])
     totalUsd += x["curvalUsd"]
     totalGbp += x["curvalGbp"]
 email_body += "\n"
 for x in arr:
-    email_body += "total value of {:5.2f} {} = ${:8.2f} = {:8.2f} gbp\n".format(x["abs"],x["symbol"],x["curvalUsd"],x["curvalGbp"])
-email_body += "{:<24} = ${:8.2f} = {:8.2f} gbp\n".format("total overall value", totalUsd, totalGbp)
+    email_body += "total value of {:9.2f} {:6} = ${:8.2f} = {:8.2f} gbp\n".format(x["abs"],x["symbol"],x["curvalUsd"],x["curvalGbp"])
+email_body += "{} = ${:8.2f} = {:8.2f} gbp\n".format("total overall value", totalUsd, totalGbp)
 email_body += "\n"
 
 # ROI
@@ -179,7 +195,7 @@ email_body += "purchase cost = {:.2f} gbp\nroi = {:.1f}%\n".format(amountPaidFor
 print(email_body)
 email_subject = "cmc data: cap=${:.1f}b, vol=${:.1f}b".format(marketCap/1000000000, marketVol/1000000000)
 for x in arr:
-    email_subject += ", {}={:.0f}gbp".format(x["symbol"],x["gbp"])
+    email_subject += ", {}={:.1f}gbp".format(x["symbol"],x["gbp"])
 print(email_subject)
 send_email(email_subject, email_body, ['cmcwatcher@gmail.com'], passwd_cmcwatcher)
 #send_email(email_subject, email_body, ['toepoke@hotmail.com'], passwd_cmcwatcher)
