@@ -125,7 +125,7 @@ email_body += "\n"
 amountPaidForAllCryptoGbp = float(598.42+3030)
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
-            "abs":float(1.60197267), 
+            "abs":float(1.61958591), 
             "usd":float(0), 
             "gbp":float(0), 
             "curvalUsd":float(0), 
