@@ -98,8 +98,8 @@ if not options.passwd:
    sys.exit(2)
 passwd_cmcwatcher = options.passwd
 
-#myAllCoins = coinmarketcap.ticker()
-#print myAllCoins
+#allCoins = coinmarketcap.ticker()
+#print allCoins
 
 # get gbp/usd
 cable   = float(myFx.get_rate('GBP','USD'))
@@ -158,44 +158,47 @@ omgDict = { "ticker":"omisego",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0)}
-iotaDict = { "ticker":"tenx",
+tnxDict = { "ticker":"tenx",
             "symbol":"pay",
             "abs":float(172.10421034),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0)}
-get_price_from_cmc(btcDict,  cable)
-get_price_from_cmc(ethDict,  cable)
-get_price_from_cmc(bchDict,  cable)
-get_price_from_cmc(neoDict,  cable)
-get_price_from_cmc(omgDict,  cable)
-get_price_from_cmc(iotaDict, cable)
+get_price_from_cmc(btcDict, cable)
+get_price_from_cmc(ethDict, cable)
+get_price_from_cmc(bchDict, cable)
+get_price_from_cmc(neoDict, cable)
+get_price_from_cmc(omgDict, cable)
+get_price_from_cmc(tnxDict, cable)
 # create an array of crypto dictionaries
-arr = [btcDict, ethDict, bchDict, neoDict, omgDict, iotaDict]
+arr = [btcDict, ethDict, bchDict, neoDict, omgDict, tnxDict]
 
-# loop through the array of dictionaries
 totalUsd = float(0)
 totalGbp = float(0)
+# loop through the array of dictionaries, get spot prices of owned crypto
 for x in arr:
     email_body += "{:5} price = ${:7.2f} = {:7.2f} gbp\n".format(x["symbol"], x["usd"], x["gbp"])
     totalUsd += x["curvalUsd"]
     totalGbp += x["curvalGbp"]
 email_body += "\n"
+# loop through the array of dictionaries, get values of crypto coins owned
 for x in arr:
     email_body += "total value of {:9.2f} {:6} = ${:8.2f} = {:8.2f} gbp\n".format(x["abs"],x["symbol"],x["curvalUsd"],x["curvalGbp"])
 email_body += "{} = ${:8.2f} = {:8.2f} gbp\n".format("total overall value", totalUsd, totalGbp)
 email_body += "\n"
 
-# ROI
+# roi
 roi = ((totalGbp - amountPaidForAllCryptoGbp) / amountPaidForAllCryptoGbp) * 100
 email_body += "purchase cost = {:.2f} gbp\nroi = {:.1f}%\n".format(amountPaidForAllCryptoGbp, roi)
 
-# print info (email_body) and send email
-print(email_body)
+# create email subject, print info (email body and subject) and send email
+# add market cap and market volume information to email subject
 email_subject = "cmc data: cap=${:.1f}b, vol=${:.1f}b".format(marketCap/1000000000, marketVol/1000000000)
+# add values of crypto coins owned to email subject
 for x in arr:
     email_subject += ", {}={:.1f}gbp".format(x["symbol"],x["gbp"])
+print(email_body)
 print(email_subject)
 send_email(email_subject, email_body, ['cmcwatcher@gmail.com'], passwd_cmcwatcher)
 #send_email(email_subject, email_body, ['toepoke@hotmail.com'], passwd_cmcwatcher)
