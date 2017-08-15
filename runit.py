@@ -125,7 +125,7 @@ email_body += "\n"
 amountPaidForAllCryptoGbp = float(598.42+3030)
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
-            "abs":float(1.61958591), 
+            "abs":float(1.44733267), 
             "usd":float(0), 
             "gbp":float(0), 
             "curvalUsd":float(0), 
@@ -165,14 +165,22 @@ tnxDict = { "ticker":"tenx",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0)}
+bnbDict = { "ticker":"binance-coin",
+            "symbol":"bnb",
+            "abs":float(547),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0)}
 get_price_from_cmc(btcDict, cable)
 get_price_from_cmc(ethDict, cable)
 get_price_from_cmc(bchDict, cable)
 get_price_from_cmc(neoDict, cable)
 get_price_from_cmc(omgDict, cable)
 get_price_from_cmc(tnxDict, cable)
+get_price_from_cmc(bnbDict, cable)
 # create an array of crypto dictionaries
-arr = [btcDict, ethDict, bchDict, neoDict, omgDict, tnxDict]
+arr = [btcDict, ethDict, bchDict, neoDict, omgDict, tnxDict, bnbDict]
 
 totalUsd = float(0)
 totalGbp = float(0)
