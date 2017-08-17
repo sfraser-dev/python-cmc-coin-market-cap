@@ -122,7 +122,7 @@ email_body += "market vol = ${:5.2f}B = {:5.2f}B gbp (in the last 24h)\n".format
 email_body += "\n"
 
 ########################### add new coins here #################################
-amountPaidForAllCryptoGbp = float(598.42+3030)
+amountPaidForAllCryptoGbp = float(598.42+3030+1400)
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
             "abs":float(1.44733267), 
@@ -172,6 +172,13 @@ bnbDict = { "ticker":"binance-coin",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0)}
+bmtDict = { "ticker":"bytom",
+            "symbol":"bmt",
+            "abs":float(2500),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0)}
 get_price_from_cmc(btcDict, cable)
 get_price_from_cmc(ethDict, cable)
 get_price_from_cmc(bchDict, cable)
@@ -179,8 +186,9 @@ get_price_from_cmc(neoDict, cable)
 get_price_from_cmc(omgDict, cable)
 get_price_from_cmc(tnxDict, cable)
 get_price_from_cmc(bnbDict, cable)
+get_price_from_cmc(bmtDict, cable)
 # create an array of crypto dictionaries
-arr = [btcDict, ethDict, bchDict, neoDict, omgDict, tnxDict, bnbDict]
+arr = [btcDict, ethDict, bchDict, neoDict, omgDict, tnxDict, bnbDict, bmtDict]
 
 totalUsd = float(0)
 totalGbp = float(0)
