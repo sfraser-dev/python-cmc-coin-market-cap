@@ -122,17 +122,17 @@ email_body += "market vol = ${:5.2f}B = {:5.2f}B gbp (in the last 24h)\n".format
 email_body += "\n"
 
 ########################### add new coins here #################################
-amountPaidForAllCryptoGbp = float(598.42+3030+1400)
+amountPaidForAllCryptoGbp = float(598.42+3030+(2520-1150.39))
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
-            "abs":float(1.44733267), 
+            "abs":float(1.60874234), 
             "usd":float(0), 
             "gbp":float(0), 
             "curvalUsd":float(0), 
             "curvalGbp":float(0)}
 ethDict = { "ticker":"ethereum",
             "symbol":"eth",
-            "abs":float(26.9778444698),
+            "abs":float(28.0529356298),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
@@ -174,7 +174,7 @@ bnbDict = { "ticker":"binance-coin",
             "curvalGbp":float(0)}
 bmtDict = { "ticker":"bytom",
             "symbol":"bmt",
-            "abs":float(2500),
+            "abs":float(2152),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
