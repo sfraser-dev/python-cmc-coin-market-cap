@@ -129,56 +129,64 @@ btcDict = { "ticker":"bitcoin",
             "usd":float(0), 
             "gbp":float(0), 
             "curvalUsd":float(0), 
-            "curvalGbp":float(0)}
+            "curvalGbp":float(0),
+            "costBasisGbp":float(229.02+357.30)}    # T1-T6, T7
 ethDict = { "ticker":"ethereum",
             "symbol":"eth",
             "abs":float(28.0529356298),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
-            "curvalGbp":float(0)}
+            "curvalGbp":float(0),
+            "costBasisGbp":float(369.40+255.95)}    # T1-T6, T7
 bchDict = { "ticker":"bitcoin-cash",
             "symbol":"bch",
             "abs":float(1.52451799),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
-            "curvalGbp":float(0)}
+            "curvalGbp":float(0),
+            "costBasisGbp":float(0.00)}
 neoDict = { "ticker":"neo",
             "symbol":"neo",
             "abs":float(69.43306569),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
-            "curvalGbp":float(0)}
+            "curvalGbp":float(0),
+            "costBasisGbp":float(1064.50)}
 omgDict = { "ticker":"omisego",
             "symbol":"omg",
             "abs":float(171.5268784),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
-            "curvalGbp":float(0)}
+            "curvalGbp":float(0),
+            "costBasisGbp":float(811.04)}
 tnxDict = { "ticker":"tenx",
             "symbol":"pay",
             "abs":float(172.08421034),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
-            "curvalGbp":float(0)}
+            "curvalGbp":float(0),
+            "costBasisGbp":float(839.31)}
 bnbDict = { "ticker":"binance-coin",
             "symbol":"bnb",
             "abs":float(547),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
-            "curvalGbp":float(0)}
+            "curvalGbp":float(0),
+            "costBasisGbp":float(579.80)}
 bmtDict = { "ticker":"bytom",
             "symbol":"bmt",
             "abs":float(2152),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
-            "curvalGbp":float(0)}
+            "curvalGbp":float(0),
+            "costBasisGbp":float(491.69)}
 get_price_from_cmc(btcDict, cable)
 get_price_from_cmc(ethDict, cable)
 get_price_from_cmc(bchDict, cable)
@@ -200,7 +208,7 @@ for x in arr:
 email_body += "\n"
 # loop through the array of dictionaries, get values of crypto coins owned
 for x in arr:
-    email_body += "total value of {:9.2f} {:6} = ${:8.2f} = {:8.2f} gbp\n".format(x["abs"],x["symbol"],x["curvalUsd"],x["curvalGbp"])
+    email_body += "total value of {:9.2f} {:6} = ${:8.2f} = {:8.2f} gbp (cost basis = {:8.2f} gbp, p/l = {:8.2f} gbp)\n".format(x["abs"],x["symbol"],x["curvalUsd"],x["curvalGbp"],x["costBasisGbp"],x["curvalGbp"]-x["costBasisGbp"])
 email_body += "{} = ${:8.2f} = {:8.2f} gbp\n".format("total overall value", totalUsd, totalGbp)
 email_body += "\n"
 
