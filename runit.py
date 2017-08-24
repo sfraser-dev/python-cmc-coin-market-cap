@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 # using Anaconda Python
 
@@ -113,6 +114,10 @@ passwd_cmcwatcher = options.passwd
 cable   = float(myFx.get_rate('GBP','USD'))
 chunnel = float(myFx.get_rate('EUR','GBP'))
 
+# python 2.7 is ascii by default (ie: no GBP £ sign)
+gbpUnicode = unichr(163)
+gbpAscii = gbpUnicode.encode('utf-8')
+
 # get date and time
 now = datetime.datetime.now()
 dateTime = now.strftime("%Y-%m-%d %H:%M")
@@ -125,8 +130,8 @@ email_body += "eur/gbp: {:.4f}\n\n".format(chunnel)
 myStats = coinmarketcap.stats()
 marketCap = float(get_market_cap(myStats))
 marketVol = float(get_market_vol(myStats))
-email_body += "market cap = ${:5.2f}B = {:5.2f}B gbp\n".format(marketCap/1000000000, (marketCap/1000000000)/cable)
-email_body += "market vol = ${:5.2f}B = {:5.2f}B gbp (in the last 24h)\n".format(marketVol/1000000000, (marketVol/1000000000)/cable)
+email_body += "market cap = ${:8.2f}B = {:}{:8.2f}B\n".format(marketCap/1000000000, gbpAscii, (marketCap/1000000000)/cable)
+email_body += "market vol = ${:8.2f}B = {:}{:8.2f}B (in the last 24h)\n".format(marketVol/1000000000, gbpAscii, (marketVol/1000000000)/cable)
 email_body += "\n"
 
 ########################### add new coins here #################################
@@ -228,26 +233,26 @@ totalUsd = float(0)
 totalGbp = float(0)
 # loop through the array of dictionaries, get spot prices of owned crypto
 for x in arr:
-    email_body += "{:5} price = ${:7.2f} = {:7.2f} gbp\n".format(symbol_format(x), x["usd"], x["gbp"])
+    email_body += "{:5} price = ${:8.2f} = {:}{:8.2f}\n".format(symbol_format(x), x["usd"], gbpAscii, x["gbp"])
     totalUsd += x["curvalUsd"]
     totalGbp += x["curvalGbp"]
 email_body += "\n"
 # loop through the array of dictionaries, get values of crypto coins owned
 for x in arr:
-    email_body += "total value of {:7.2f} {:3} = ${:7.2f} = {:7.2f} gbp (cost basis = {:6.1f} gbp, p/l = {:6.1f} gbp, avgCost = {:5.1f} gbp)\n".format(x["abs"],symbol_format(x),x["curvalUsd"],x["curvalGbp"],x["costBasisGbp"],x["curvalGbp"]-x["costBasisGbp"], x["costBasisGbp"]/x["abs"])
-email_body += "{} = ${:8.2f} = {:8.2f} gbp\n".format("total overall value", totalUsd, totalGbp)
+    email_body += "tot val of {:8.2f} {:3} = ${:8.2f} = {:}{:8.2f} (costBasis: {:}{:6.1f}, p/l: {:}{:6.1f}, avgCost: {:}{:6.1f} (${:6.1f}))\n".format(x["abs"],symbol_format(x),x["curvalUsd"],gbpAscii, x["curvalGbp"], gbpAscii, x["costBasisGbp"], gbpAscii, x["curvalGbp"]-x["costBasisGbp"], gbpAscii, x["costBasisGbp"]/x["abs"], x["costBasisGbp"]/x["abs"]*cable)
+email_body += "{} = ${:8.2f} = {:}{:8.2f} gbp\n".format("total overall value", totalUsd, gbpAscii, totalGbp)
 email_body += "\n"
 
 # roi
 roi = ((totalGbp - amountPaidForAllCryptoGbp) / amountPaidForAllCryptoGbp) * 100
-email_body += "purchase cost = {:.2f} gbp\nroi = {:.1f}%\n".format(amountPaidForAllCryptoGbp, roi)
+email_body += "purchase cost = {:}{:.2f}\nroi = {:.1f}%\n".format(gbpAscii, amountPaidForAllCryptoGbp, roi)
 
 # create email subject, print info (email body and subject) and send email
 # add market cap and market volume information to email subject
-email_subject = "cmc data: cap=${:.1f}b, vol=${:.1f}b".format(marketCap/1000000000, marketVol/1000000000)
+email_subject = "cmc data: cap=${:.1f}B, vol=${:.1f}B".format(marketCap/1000000000, marketVol/1000000000)
 # add values of crypto coins owned to email subject
 for x in arr:
-    email_subject += ", {}={:.1f}gbp".format(symbol_format(x),x["gbp"])
+    email_subject += ", {}={:}{:.2f}".format(symbol_format(x), gbpAscii, x["gbp"])
 print(email_body)
 print(email_subject)
 send_email(email_subject, email_body, ['cmcwatcher@gmail.com'], passwd_cmcwatcher)
