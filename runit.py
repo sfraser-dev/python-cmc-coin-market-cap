@@ -234,7 +234,7 @@ for x in arr:
 email_body += "\n"
 # loop through the array of dictionaries, get values of crypto coins owned
 for x in arr:
-    email_body += "total value of {:9.2f} {:6} = ${:8.2f} = {:8.2f} gbp (cost basis = {:8.2f} gbp, p/l = {:8.2f} gbp)\n".format(x["abs"],symbol_format(x),x["curvalUsd"],x["curvalGbp"],x["costBasisGbp"],x["curvalGbp"]-x["costBasisGbp"])
+    email_body += "total value of {:7.2f} {:3} = ${:7.2f} = {:7.2f} gbp (cost basis = {:6.1f} gbp, p/l = {:6.1f} gbp, avgCost = {:5.1f} gbp)\n".format(x["abs"],symbol_format(x),x["curvalUsd"],x["curvalGbp"],x["costBasisGbp"],x["curvalGbp"]-x["costBasisGbp"], x["costBasisGbp"]/x["abs"])
 email_body += "{} = ${:8.2f} = {:8.2f} gbp\n".format("total overall value", totalUsd, totalGbp)
 email_body += "\n"
 
