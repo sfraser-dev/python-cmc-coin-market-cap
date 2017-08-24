@@ -252,9 +252,9 @@ email_body += "p/l total (per coin) = {:}{:8.2f} (good approx, but not every las
 email_body += "\n"
 
 # roi
-email_body += "total oveall value   = {:}{:8.2f} (includes all bank, exchange and tx fees)\n".format(gbpAscii, totalGbp)
-roi = ((totalGbp - amountPaidForAllCryptoGbp) / amountPaidForAllCryptoGbp) * 100
 email_body += "total purchase cost  = {:}{:8.2f} (includes all bank, exchange and tx fees)\n".format(gbpAscii, amountPaidForAllCryptoGbp)
+email_body += "total overall value  = {:}{:8.2f} (includes all bank, exchange and tx fees)\n".format(gbpAscii, totalGbp)
+roi = ((totalGbp - amountPaidForAllCryptoGbp) / amountPaidForAllCryptoGbp) * 100
 email_body += "total p/l overall    = {:}{:8.2f} (includes all bank, exchange and tx fees)\n".format(gbpAscii, totalGbp-amountPaidForAllCryptoGbp)
 email_body += "roi = {:.1f}%\n".format(roi)
 
