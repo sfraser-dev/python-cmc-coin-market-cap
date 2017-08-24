@@ -138,7 +138,7 @@ email_body += "\n"
 amountPaidForAllCryptoGbp = float(598.42+3030+(2520-1150.39+67)+1000)
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
-            "abs":float(1.60874234), 
+            "abs":float(1.60839549), 
             "usd":float(0), 
             "gbp":float(0), 
             "curvalUsd":float(0), 
@@ -238,14 +238,25 @@ for x in arr:
     totalGbp += x["curvalGbp"]
 email_body += "\n"
 # loop through the array of dictionaries, get values of crypto coins owned
+PLbtcEth  = 0
+PLaltCoin = 0
 for x in arr:
     email_body += "tot val of {:8.2f} {:3} = ${:8.2f} = {:}{:8.2f} (costBasis: {:}{:6.1f}, p/l: {:}{:6.1f}, avgCost: {:}{:6.1f} (${:6.1f}))\n".format(x["abs"],symbol_format(x),x["curvalUsd"],gbpAscii, x["curvalGbp"], gbpAscii, x["costBasisGbp"], gbpAscii, x["curvalGbp"]-x["costBasisGbp"], gbpAscii, x["costBasisGbp"]/x["abs"], x["costBasisGbp"]/x["abs"]*cable)
-email_body += "{} = ${:8.2f} = {:}{:8.2f} gbp\n".format("total overall value", totalUsd, gbpAscii, totalGbp)
+    if x["symbol"] == "btc" or x["symbol"] == "eth":
+        PLbtcEth += x["curvalGbp"]-x["costBasisGbp"]
+    else:
+        PLaltCoin += x["curvalGbp"]-x["costBasisGbp"]
+email_body += "p/l btc and eth      = {:}{:8.2f} (good approx, but not every last fee accounted for)\n".format(gbpAscii, PLbtcEth)
+email_body += "p/l altcoins         = {:}{:8.2f} (good approx, but not every last fee accounted for)\n".format(gbpAscii, PLaltCoin)
+email_body += "p/l total (per coin) = {:}{:8.2f} (good approx, but not every last fee accounted for)\n".format(gbpAscii, PLbtcEth+PLaltCoin)
 email_body += "\n"
 
 # roi
+email_body += "total oveall value   = {:}{:8.2f} (includes all bank, exchange and tx fees)\n".format(gbpAscii, totalGbp)
 roi = ((totalGbp - amountPaidForAllCryptoGbp) / amountPaidForAllCryptoGbp) * 100
-email_body += "purchase cost = {:}{:.2f}\nroi = {:.1f}%\n".format(gbpAscii, amountPaidForAllCryptoGbp, roi)
+email_body += "total purchase cost  = {:}{:8.2f} (includes all bank, exchange and tx fees)\n".format(gbpAscii, amountPaidForAllCryptoGbp)
+email_body += "total p/l overall    = {:}{:8.2f} (includes all bank, exchange and tx fees)\n".format(gbpAscii, totalGbp-amountPaidForAllCryptoGbp)
+email_body += "roi = {:.1f}%\n".format(roi)
 
 # create email subject, print info (email body and subject) and send email
 # add market cap and market volume information to email subject
