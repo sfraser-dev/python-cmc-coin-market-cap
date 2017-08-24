@@ -88,6 +88,14 @@ def get_price_from_cmc(dic, cable):
     dic["curvalUsd"]=dic["abs"]*usd
     dic["curvalGbp"]=dic["abs"]*gbp
 
+def symbol_format(dic):
+    # only want sybols of three letters
+    sym = dic["symbol"]
+    if sym == "miota":
+        return "iot"
+    else:
+        return sym
+
 ### main
 parser = OptionParser(usage='usage: %prog -p PASSWD')
 parser.add_option("-p", dest="passwd",
@@ -122,7 +130,7 @@ email_body += "market vol = ${:5.2f}B = {:5.2f}B gbp (in the last 24h)\n".format
 email_body += "\n"
 
 ########################### add new coins here #################################
-amountPaidForAllCryptoGbp = float(598.42+3030+(2520-1150.39))
+amountPaidForAllCryptoGbp = float(598.42+3030+(2520-1150.39+67)+1000)
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
             "abs":float(1.60874234), 
@@ -139,6 +147,14 @@ ethDict = { "ticker":"ethereum",
             "curvalUsd":float(0),
             "curvalGbp":float(0),
             "costBasisGbp":float(369.40+255.95)}    # T1-T6, T7
+xmrDict = { "ticker":"monero",
+            "symbol":"xmr",
+            "abs":float(6.08808088),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0),
+            "costBasisGbp":float(466.61)}
 bchDict = { "ticker":"bitcoin-cash",
             "symbol":"bch",
             "abs":float(1.52451799),
@@ -163,6 +179,14 @@ omgDict = { "ticker":"omisego",
             "curvalUsd":float(0),
             "curvalGbp":float(0),
             "costBasisGbp":float(811.04)}
+iotDict = { "ticker":"iota",
+            "symbol":"miota",
+            "abs":float(720.28547762),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0),
+            "costBasisGbp":float(518.00)}
 tnxDict = { "ticker":"tenx",
             "symbol":"pay",
             "abs":float(172.08421034),
@@ -189,26 +213,28 @@ bmtDict = { "ticker":"bytom",
             "costBasisGbp":float(491.69)}
 get_price_from_cmc(btcDict, cable)
 get_price_from_cmc(ethDict, cable)
+get_price_from_cmc(xmrDict, cable)
 get_price_from_cmc(bchDict, cable)
 get_price_from_cmc(neoDict, cable)
 get_price_from_cmc(omgDict, cable)
+get_price_from_cmc(iotDict, cable)
 get_price_from_cmc(tnxDict, cable)
 get_price_from_cmc(bnbDict, cable)
 get_price_from_cmc(bmtDict, cable)
 # create an array of crypto dictionaries
-arr = [btcDict, ethDict, bchDict, neoDict, omgDict, tnxDict, bnbDict, bmtDict]
+arr = [btcDict, ethDict, xmrDict, bchDict, neoDict, omgDict, iotDict, tnxDict, bnbDict, bmtDict]
 
 totalUsd = float(0)
 totalGbp = float(0)
 # loop through the array of dictionaries, get spot prices of owned crypto
 for x in arr:
-    email_body += "{:5} price = ${:7.2f} = {:7.2f} gbp\n".format(x["symbol"], x["usd"], x["gbp"])
+    email_body += "{:5} price = ${:7.2f} = {:7.2f} gbp\n".format(symbol_format(x), x["usd"], x["gbp"])
     totalUsd += x["curvalUsd"]
     totalGbp += x["curvalGbp"]
 email_body += "\n"
 # loop through the array of dictionaries, get values of crypto coins owned
 for x in arr:
-    email_body += "total value of {:9.2f} {:6} = ${:8.2f} = {:8.2f} gbp (cost basis = {:8.2f} gbp, p/l = {:8.2f} gbp)\n".format(x["abs"],x["symbol"],x["curvalUsd"],x["curvalGbp"],x["costBasisGbp"],x["curvalGbp"]-x["costBasisGbp"])
+    email_body += "total value of {:9.2f} {:6} = ${:8.2f} = {:8.2f} gbp (cost basis = {:8.2f} gbp, p/l = {:8.2f} gbp)\n".format(x["abs"],symbol_format(x),x["curvalUsd"],x["curvalGbp"],x["costBasisGbp"],x["curvalGbp"]-x["costBasisGbp"])
 email_body += "{} = ${:8.2f} = {:8.2f} gbp\n".format("total overall value", totalUsd, totalGbp)
 email_body += "\n"
 
@@ -221,7 +247,7 @@ email_body += "purchase cost = {:.2f} gbp\nroi = {:.1f}%\n".format(amountPaidFor
 email_subject = "cmc data: cap=${:.1f}b, vol=${:.1f}b".format(marketCap/1000000000, marketVol/1000000000)
 # add values of crypto coins owned to email subject
 for x in arr:
-    email_subject += ", {}={:.1f}gbp".format(x["symbol"],x["gbp"])
+    email_subject += ", {}={:.1f}gbp".format(symbol_format(x),x["gbp"])
 print(email_body)
 print(email_subject)
 send_email(email_subject, email_body, ['cmcwatcher@gmail.com'], passwd_cmcwatcher)
