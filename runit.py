@@ -97,6 +97,12 @@ def symbol_format(dic):
     else:
         return sym
 
+def calc_roi_dict(dic):
+    if dic["symbol"] == "bch":
+        return 0.000
+    roi = (dic["curvalGbp"]-dic["costBasisGbp"])/dic["costBasisGbp"]
+    return roi*100
+
 ### main
 parser = OptionParser(usage='usage: %prog -p PASSWD')
 parser.add_option("-p", dest="passwd",
@@ -241,7 +247,7 @@ email_body += "\n"
 PLbtcEth  = 0
 PLaltCoin = 0
 for x in arr:
-    email_body += "totValOf {:8.2f} {:3} = ${:8.2f} = {:}{:8.2f} (costBasis: {:}{:6.1f}, p/l: {:}{:6.1f}, avgCostPerCoin: {:}{:6.1f} (${:6.1f}))\n".format(x["abs"],symbol_format(x),x["curvalUsd"],gbpAscii, x["curvalGbp"], gbpAscii, x["costBasisGbp"], gbpAscii, x["curvalGbp"]-x["costBasisGbp"], gbpAscii, x["costBasisGbp"]/x["abs"], x["costBasisGbp"]/x["abs"]*cable)
+    email_body += "totValOf {:8.2f} {:3} = ${:8.2f} = {:}{:8.2f} (costBasis: {:}{:6.1f}, p/l: {:}{:6.1f}, roi: {:7.2f}%, avgCostPerCoin: {:}{:6.1f} (${:6.1f}))\n".format(x["abs"],symbol_format(x),x["curvalUsd"],gbpAscii, x["curvalGbp"], gbpAscii, x["costBasisGbp"], gbpAscii, x["curvalGbp"]-x["costBasisGbp"], calc_roi_dict(x), gbpAscii, x["costBasisGbp"]/x["abs"], x["costBasisGbp"]/x["abs"]*cable)
     if x["symbol"] == "btc" or x["symbol"] == "eth":
         PLbtcEth += x["curvalGbp"]-x["costBasisGbp"]
     else:
@@ -256,7 +262,7 @@ email_body += "total overall purchase cost = {:}{:8.2f} (includes all bank, exch
 email_body += "total overall value         = {:}{:8.2f} (includes all bank, exchange and tx fees (calculated per tranche))\n".format(gbpAscii, totalGbp)
 roi = ((totalGbp - amountPaidForAllCryptoGbp) / amountPaidForAllCryptoGbp) * 100
 email_body += "total overall p/l           = {:}{:8.2f} (includes all bank, exchange and tx fees (calculated per tranche))\n".format(gbpAscii, totalGbp-amountPaidForAllCryptoGbp)
-email_body += "roi = {:.1f}%\n".format(roi)
+email_body += "total overall roi = {:.1f}%\n".format(roi)
 
 # create email subject, print info (email body and subject) and send email
 # add market cap and market volume information to email subject
