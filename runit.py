@@ -135,31 +135,31 @@ email_body += "market vol = ${:8.2f}B = {:}{:8.2f}B (in the last 24h)\n".format(
 email_body += "\n"
 
 ########################### add new coins here #################################
-amountPaidForAllCryptoGbp = float(598.42+3030+(2520-1150.39+67)+1000)
+amountPaidForAllCryptoGbp = float(598.42+3030+(2520-1150.39+67)+1000+3000)
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
-            "abs":float(1.60839549), 
+            "abs":float(1.60839549+0.38291019), 
             "usd":float(0), 
             "gbp":float(0), 
             "curvalUsd":float(0), 
             "curvalGbp":float(0),
-            "costBasisGbp":float(229.02+357.30)}    # T1-T6, T7
+            "costBasisGbp":float(229.02+1804.80)}    # T1-T6, T7
 ethDict = { "ticker":"ethereum",
             "symbol":"eth",
-            "abs":float(28.0529356298),
+            "abs":float(29.3281168898),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
-            "costBasisGbp":float(369.40+255.95)}    # T1-T6, T7
+            "costBasisGbp":float(369.40+586.18)}    # T1-T6, T7
 xmrDict = { "ticker":"monero",
             "symbol":"xmr",
-            "abs":float(6.08808088),
+            "abs":float(9.96808088),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
-            "costBasisGbp":float(466.61)}
+            "costBasisGbp":float(890.79)}
 bchDict = { "ticker":"bitcoin-cash",
             "symbol":"bch",
             "abs":float(1.52451799),
@@ -170,7 +170,7 @@ bchDict = { "ticker":"bitcoin-cash",
             "costBasisGbp":float(0.00)}
 neoDict = { "ticker":"neo",
             "symbol":"neo",
-            "abs":float(69.43306569),
+            "abs":float(70.30806569),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
@@ -192,14 +192,14 @@ iotDict = { "ticker":"iota",
             "curvalUsd":float(0),
             "curvalGbp":float(0),
             "costBasisGbp":float(518.00)}
-tnxDict = { "ticker":"tenx",
+payDict = { "ticker":"tenx",
             "symbol":"pay",
-            "abs":float(172.08421034),
+            "abs":float(260.07421034),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
-            "costBasisGbp":float(839.31)}
+            "costBasisGbp":float(1097.13)}
 bnbDict = { "ticker":"binance-coin",
             "symbol":"bnb",
             "abs":float(547),
@@ -210,12 +210,20 @@ bnbDict = { "ticker":"binance-coin",
             "costBasisGbp":float(579.80)}
 bmtDict = { "ticker":"bytom",
             "symbol":"bmt",
-            "abs":float(2152),
+            "abs":float(3580.569),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
-            "costBasisGbp":float(491.69)}
+            "costBasisGbp":float(695.02)}
+lskDict = { "ticker":"lisk",
+            "symbol":"lsk",
+            "abs":float(100.17857486),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0),
+            "costBasisGbp":float(419.34)}
 get_price_from_cmc(btcDict, cable)
 get_price_from_cmc(ethDict, cable)
 get_price_from_cmc(xmrDict, cable)
@@ -223,11 +231,12 @@ get_price_from_cmc(bchDict, cable)
 get_price_from_cmc(neoDict, cable)
 get_price_from_cmc(omgDict, cable)
 get_price_from_cmc(iotDict, cable)
-get_price_from_cmc(tnxDict, cable)
+get_price_from_cmc(payDict, cable)
 get_price_from_cmc(bnbDict, cable)
 get_price_from_cmc(bmtDict, cable)
+get_price_from_cmc(lskDict, cable)
 # create an array of crypto dictionaries
-arr = [btcDict, ethDict, xmrDict, bchDict, neoDict, omgDict, iotDict, tnxDict, bnbDict, bmtDict]
+arr = [btcDict, ethDict, xmrDict, bchDict, neoDict, omgDict, iotDict, payDict, bnbDict, bmtDict, lskDict]
 
 totalUsd = float(0)
 totalGbp = float(0)
