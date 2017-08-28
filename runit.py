@@ -144,12 +144,12 @@ email_body += "\n"
 amountPaidForAllCryptoGbp = float(598.42+3030+(2520-1150.39+67)+1000+3000)
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
-            "abs":float(1.60839549+0.38291019), 
+            "abs":float(1.71587114), 
             "usd":float(0), 
             "gbp":float(0), 
             "curvalUsd":float(0), 
             "curvalGbp":float(0),
-            "costBasisGbp":float(229.02+1804.80)}    # T1-T6, T7
+            "costBasisGbp":float(229.02+892.20)}    # T1-T6, T7
 ethDict = { "ticker":"ethereum",
             "symbol":"eth",
             "abs":float(29.3281168898),
@@ -160,12 +160,12 @@ ethDict = { "ticker":"ethereum",
             "costBasisGbp":float(369.40+586.18)}    # T1-T6, T7
 xmrDict = { "ticker":"monero",
             "symbol":"xmr",
-            "abs":float(9.96808088),
+            "abs":float(17.9680808),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
-            "costBasisGbp":float(890.79)}
+            "costBasisGbp":float(1803.39)}
 bchDict = { "ticker":"bitcoin-cash",
             "symbol":"bch",
             "abs":float(1.52451799),
