@@ -49,6 +49,24 @@ def get_price_usd (longstring):
         if "price_usd" in key:
             return value
 
+def get_change_1hr (longstring):
+    myDict = get_values_as_dict(longstring)
+    for key, value in myDict.items():
+        if "percent_change_1h" in key:
+            return value
+
+def get_change_24hrs (longstring):
+    myDict = get_values_as_dict(longstring)
+    for key, value in myDict.items():
+        if "percent_change_24h" in key:
+            return value
+
+def get_change_7days (longstring):
+    myDict = get_values_as_dict(longstring)
+    for key, value in myDict.items():
+        if "percent_change_7d" in key:
+            return value
+
 def get_market_vol (longstring):
     myDict = get_values_as_dict(longstring)
     for key, value in myDict.items():
@@ -88,6 +106,9 @@ def get_price_from_cmc(dic, cable):
     dic['gbp']=gbp
     dic["curvalUsd"]=dic["abs"]*usd
     dic["curvalGbp"]=dic["abs"]*gbp
+    dic["1hr"]=float(get_change_1hr(coinmarketcap.ticker(dic['ticker'])))
+    dic["24hrs"]=float(get_change_24hrs(coinmarketcap.ticker(dic['ticker'])))
+    dic["7days"]=float(get_change_7days(coinmarketcap.ticker(dic['ticker'])))
 
 def symbol_format(dic):
     # only want sybols of three letters
@@ -149,6 +170,9 @@ btcDict = { "ticker":"bitcoin",
             "gbp":float(0), 
             "curvalUsd":float(0), 
             "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
             "costBasisGbp":float(229.02+892.20)}    # T1-T6, T7
 ethDict = { "ticker":"ethereum",
             "symbol":"eth",
@@ -157,6 +181,9 @@ ethDict = { "ticker":"ethereum",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
             "costBasisGbp":float(369.40+586.18)}    # T1-T6, T7
 xmrDict = { "ticker":"monero",
             "symbol":"xmr",
@@ -165,6 +192,9 @@ xmrDict = { "ticker":"monero",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
             "costBasisGbp":float(1803.39)}
 bchDict = { "ticker":"bitcoin-cash",
             "symbol":"bch",
@@ -173,6 +203,9 @@ bchDict = { "ticker":"bitcoin-cash",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
             "costBasisGbp":float(0.00)}
 neoDict = { "ticker":"neo",
             "symbol":"neo",
@@ -181,6 +214,9 @@ neoDict = { "ticker":"neo",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
             "costBasisGbp":float(1064.50)}
 omgDict = { "ticker":"omisego",
             "symbol":"omg",
@@ -189,6 +225,9 @@ omgDict = { "ticker":"omisego",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
             "costBasisGbp":float(811.04)}
 iotDict = { "ticker":"iota",
             "symbol":"miota",
@@ -197,6 +236,9 @@ iotDict = { "ticker":"iota",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
             "costBasisGbp":float(518.00)}
 payDict = { "ticker":"tenx",
             "symbol":"pay",
@@ -205,6 +247,9 @@ payDict = { "ticker":"tenx",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
             "costBasisGbp":float(1097.13)}
 bnbDict = { "ticker":"binance-coin",
             "symbol":"bnb",
@@ -213,6 +258,9 @@ bnbDict = { "ticker":"binance-coin",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
             "costBasisGbp":float(579.80)}
 bmtDict = { "ticker":"bytom",
             "symbol":"bmt",
@@ -221,6 +269,9 @@ bmtDict = { "ticker":"bytom",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
             "costBasisGbp":float(695.02)}
 lskDict = { "ticker":"lisk",
             "symbol":"lsk",
@@ -229,6 +280,9 @@ lskDict = { "ticker":"lisk",
             "gbp":float(0),
             "curvalUsd":float(0),
             "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
             "costBasisGbp":float(419.34)}
 get_price_from_cmc(btcDict, cable)
 get_price_from_cmc(ethDict, cable)
@@ -248,7 +302,7 @@ totalUsd = float(0)
 totalGbp = float(0)
 # loop through the array of dictionaries, get spot prices of owned crypto
 for x in arr:
-    email_body += "{} price = ${:8.2f} = {:}{:8.2f}\n".format(symbol_format(x), x["usd"], gbpAscii, x["gbp"])
+    email_body += "{} price = ${:8.2f} = {:}{:8.2f}, 1hr={:8.2f}%, 24hrs={:8.2f}%, 7days={:8.2f}%\n".format(symbol_format(x), x["usd"], gbpAscii, x["gbp"], x["1hr"], x["24hrs"], x["7days"])
     totalUsd += x["curvalUsd"]
     totalGbp += x["curvalGbp"]
 email_body += "\n"
