@@ -261,16 +261,16 @@ for x in arr:
         PLbtcEth += x["curvalGbp"]-x["costBasisGbp"]
     else:
         PLaltCoin += x["curvalGbp"]-x["costBasisGbp"]
-email_body += "p/l btc and eth = {:}{:8.2f} (good approx, but not every last fee accounted for (calculated per individual coin))\n".format(gbpAscii, PLbtcEth)
-email_body += "p/l altcoins    = {:}{:8.2f} (good approx, but not every last fee accounted for (calculated per individual coin))\n".format(gbpAscii, PLaltCoin)
-email_body += "p/l total       = {:}{:8.2f} (good approx, but not every last fee accounted for (calculated per indvidual coin))\n".format(gbpAscii, PLbtcEth+PLaltCoin)
+email_body += "p/l btc and eth = {:}{:8.2f} (calculated per individual coin)\n".format(gbpAscii, PLbtcEth)
+email_body += "p/l altcoins    = {:}{:8.2f} (calculated per individual coin)\n".format(gbpAscii, PLaltCoin)
+email_body += "p/l total       = {:}{:8.2f} (calculated per individual coin)\n".format(gbpAscii, PLbtcEth+PLaltCoin)
 email_body += "\n"
 
 # roi
-email_body += "total overall purchase cost = {:}{:8.2f} (includes all bank, exchange and tx fees (calculated per tranche))\n".format(gbpAscii, amountPaidForAllCryptoGbp)
-email_body += "total overall value         = {:}{:8.2f} (includes all bank, exchange and tx fees (calculated per tranche))\n".format(gbpAscii, totalGbp)
+email_body += "total overall purchase cost = {:}{:8.2f} (calculated per tranche)\n".format(gbpAscii, amountPaidForAllCryptoGbp)
+email_body += "total overall value         = {:}{:8.2f} (calculated per tranche)\n".format(gbpAscii, totalGbp)
 roi = ((totalGbp - amountPaidForAllCryptoGbp) / amountPaidForAllCryptoGbp) * 100
-email_body += "total overall p/l           = {:}{:8.2f} (includes all bank, exchange and tx fees (calculated per tranche))\n".format(gbpAscii, totalGbp-amountPaidForAllCryptoGbp)
+email_body += "total overall p/l           = {:}{:8.2f} (calculated per tranche)\n".format(gbpAscii, totalGbp-amountPaidForAllCryptoGbp)
 email_body += "total overall roi = {:.1f}%\n".format(roi)
 
 # create email subject, print info (email body and subject) and send email
