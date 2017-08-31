@@ -119,9 +119,12 @@ def symbol_format(dic):
         return sym
 
 def calc_roi_dict(dic):
-    if dic["symbol"] == "bch":
-        return 0.000
-    roi = (dic["curvalGbp"]-dic["costBasisGbp"])/dic["costBasisGbp"]
+#    if dic["symbol"] == "bch":
+#        return 0.000
+    try:
+        roi = (dic["curvalGbp"]-dic["costBasisGbp"])/dic["costBasisGbp"]
+    except ZeroDivisionError:
+        roi = float('Inf')
     return roi*100
 
 ### main
