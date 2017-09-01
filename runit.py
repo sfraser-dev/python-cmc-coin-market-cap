@@ -310,17 +310,21 @@ for x in arr:
     totalGbp += x["curvalGbp"]
 email_body += "\n"
 # loop through the array of dictionaries, get values of crypto coins owned
-PLbtcEth  = 0
-PLaltCoin = 0
+CBbtcEth  = float(0)
+CBaltCoin = float(0)
+PLbtcEth  = float(0)
+PLaltCoin = float(0)
 for x in arr:
     email_body += "totValOf {:8.2f} {:3} = ${:8.2f} = {:}{:8.2f} (costBasis: {:}{:6.1f}, p/l: {:}{:6.1f}, roi: {:7.2f}%, avgCostPerCoin: {:}{:6.1f} (${:6.1f}))\n".format(x["abs"],symbol_format(x),x["curvalUsd"],gbpAscii, x["curvalGbp"], gbpAscii, x["costBasisGbp"], gbpAscii, x["curvalGbp"]-x["costBasisGbp"], calc_roi_dict(x), gbpAscii, x["costBasisGbp"]/x["abs"], x["costBasisGbp"]/x["abs"]*cable)
     if x["symbol"] == "btc" or x["symbol"] == "eth":
+        CBbtcEth += x["costBasisGbp"]
         PLbtcEth += x["curvalGbp"]-x["costBasisGbp"]
     else:
+        CBaltCoin += x["costBasisGbp"]
         PLaltCoin += x["curvalGbp"]-x["costBasisGbp"]
-email_body += "p/l btc and eth = {:}{:8.2f} (calculated per individual coin)\n".format(gbpAscii, PLbtcEth)
-email_body += "p/l altcoins    = {:}{:8.2f} (calculated per individual coin)\n".format(gbpAscii, PLaltCoin)
-email_body += "p/l total       = {:}{:8.2f} (calculated per individual coin)\n".format(gbpAscii, PLbtcEth+PLaltCoin)
+email_body += "p/l btc and eth = {:}{:8.2f} (calculated per individual coin; cost basis = {:}{:8.2f}, roi = {:8.2f}%)\n".format(gbpAscii, PLbtcEth, gbpAscii, CBbtcEth, PLbtcEth/CBbtcEth*100)
+email_body += "p/l altcoins    = {:}{:8.2f} (calculated per individual coin; cost basis = {:}{:8.2f}, roi = {:8.2f}%)\n".format(gbpAscii, PLaltCoin, gbpAscii, CBaltCoin, PLaltCoin/CBaltCoin*100)
+email_body += "p/l total       = {:}{:8.2f} (calculated per individual coin; cost basis = {:}{:8.2f}, roi = {:8.2f}%)\n".format(gbpAscii, PLbtcEth+PLaltCoin, gbpAscii, CBbtcEth+CBaltCoin, (PLbtcEth+PLaltCoin)/(CBbtcEth+CBaltCoin)*100)
 email_body += "\n"
 
 # roi
@@ -328,7 +332,7 @@ email_body += "total overall purchase cost = {:}{:8.2f} (calculated per tranche)
 email_body += "total overall value         = {:}{:8.2f} (calculated per tranche)\n".format(gbpAscii, totalGbp)
 roi = ((totalGbp - amountPaidForAllCryptoGbp) / amountPaidForAllCryptoGbp) * 100
 email_body += "total overall p/l           = {:}{:8.2f} (calculated per tranche)\n".format(gbpAscii, totalGbp-amountPaidForAllCryptoGbp)
-email_body += "total overall roi = {:.1f}%\n".format(roi)
+email_body += "total overall roi = {:8.2f}%\n".format(roi)
 
 # create email subject, print info (email body and subject) and send email
 # add market cap and market volume information to email subject
