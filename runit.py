@@ -343,4 +343,4 @@ for x in arr:
 print(email_body)
 print(email_subject)
 send_email(email_subject, email_body, ['cmcwatcher@gmail.com'], passwd_cmcwatcher)
-#send_email(email_subject, email_body, ['toepoke@hotmail.com'], passwd_cmcwatcher)
+send_email(email_subject, email_body, ['toepoke@hotmail.com'], passwd_cmcwatcher)
