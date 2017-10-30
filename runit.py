@@ -168,7 +168,7 @@ email_body += "\n"
 amountPaidForAllCryptoGbp = float(598.42+3030+(2520-1150.39+67)+1000+3000)
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
-            "abs":float(1.71587114), 
+            "abs":float(2.01278137), 
             "usd":float(0), 
             "gbp":float(0), 
             "curvalUsd":float(0), 
@@ -176,10 +176,10 @@ btcDict = { "ticker":"bitcoin",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(229.02+892.20)}    # T1-T6, T7
+            "costBasisGbp":float(229.02+2230.03)}    # T1-T6, T7
 ethDict = { "ticker":"ethereum",
             "symbol":"eth",
-            "abs":float(29.3281168898),
+            "abs":float(34.80491069),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
@@ -187,7 +187,7 @@ ethDict = { "ticker":"ethereum",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(369.40+586.18)}    # T1-T6, T7
+            "costBasisGbp":float(369.40+1847.85)}    # T1-T6, T7
 xmrDict = { "ticker":"monero",
             "symbol":"xmr",
             "abs":float(17.9680808),
@@ -221,85 +221,13 @@ neoDict = { "ticker":"neo",
             "24hrs":float(0),
             "7days":float(0),
             "costBasisGbp":float(1064.50)}
-omgDict = { "ticker":"omisego",
-            "symbol":"omg",
-            "abs":float(171.5268784),
-            "usd":float(0),
-            "gbp":float(0),
-            "curvalUsd":float(0),
-            "curvalGbp":float(0),
-            "1hr":float(0),
-            "24hrs":float(0),
-            "7days":float(0),
-            "costBasisGbp":float(811.04)}
-iotDict = { "ticker":"iota",
-            "symbol":"miota",
-            "abs":float(720.28547762),
-            "usd":float(0),
-            "gbp":float(0),
-            "curvalUsd":float(0),
-            "curvalGbp":float(0),
-            "1hr":float(0),
-            "24hrs":float(0),
-            "7days":float(0),
-            "costBasisGbp":float(518.00)}
-payDict = { "ticker":"tenx",
-            "symbol":"pay",
-            "abs":float(260.07421034),
-            "usd":float(0),
-            "gbp":float(0),
-            "curvalUsd":float(0),
-            "curvalGbp":float(0),
-            "1hr":float(0),
-            "24hrs":float(0),
-            "7days":float(0),
-            "costBasisGbp":float(1097.13)}
-bnbDict = { "ticker":"binance-coin",
-            "symbol":"bnb",
-            "abs":float(547),
-            "usd":float(0),
-            "gbp":float(0),
-            "curvalUsd":float(0),
-            "curvalGbp":float(0),
-            "1hr":float(0),
-            "24hrs":float(0),
-            "7days":float(0),
-            "costBasisGbp":float(579.80)}
-bmtDict = { "ticker":"bytom",
-            "symbol":"bmt",
-            "abs":float(3580.569),
-            "usd":float(0),
-            "gbp":float(0),
-            "curvalUsd":float(0),
-            "curvalGbp":float(0),
-            "1hr":float(0),
-            "24hrs":float(0),
-            "7days":float(0),
-            "costBasisGbp":float(695.02)}
-lskDict = { "ticker":"lisk",
-            "symbol":"lsk",
-            "abs":float(100.17857486),
-            "usd":float(0),
-            "gbp":float(0),
-            "curvalUsd":float(0),
-            "curvalGbp":float(0),
-            "1hr":float(0),
-            "24hrs":float(0),
-            "7days":float(0),
-            "costBasisGbp":float(419.34)}
 get_price_from_cmc(btcDict, cable)
 get_price_from_cmc(ethDict, cable)
 get_price_from_cmc(xmrDict, cable)
 get_price_from_cmc(bchDict, cable)
 get_price_from_cmc(neoDict, cable)
-get_price_from_cmc(omgDict, cable)
-get_price_from_cmc(iotDict, cable)
-get_price_from_cmc(payDict, cable)
-get_price_from_cmc(bnbDict, cable)
-get_price_from_cmc(bmtDict, cable)
-get_price_from_cmc(lskDict, cable)
 # create an array of crypto dictionaries
-arr = [btcDict, ethDict, xmrDict, bchDict, neoDict, omgDict, iotDict, payDict, bnbDict, bmtDict, lskDict]
+arr = [btcDict, ethDict, xmrDict, bchDict, neoDict]
 
 totalUsd = float(0)
 totalGbp = float(0)
