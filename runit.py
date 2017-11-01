@@ -250,10 +250,10 @@ for x in arr:
     else:
         CBaltCoin += x["costBasisGbp"]
         PLaltCoin += x["curvalGbp"]-x["costBasisGbp"]
-email_body += "p/l btc and eth = {:}{:8.2f} (calculated per individual coin; cost basis = {:}{:8.2f}, roi = {:8.2f}%)\n".format(gbpAscii, PLbtcEth, gbpAscii, CBbtcEth, PLbtcEth/CBbtcEth*100)
-email_body += "p/l altcoins    = {:}{:8.2f} (calculated per individual coin; cost basis = {:}{:8.2f}, roi = {:8.2f}%)\n".format(gbpAscii, PLaltCoin, gbpAscii, CBaltCoin, PLaltCoin/CBaltCoin*100)
-email_body += "p/l total       = {:}{:8.2f} (calculated per individual coin; cost basis = {:}{:8.2f}, roi = {:8.2f}%)\n".format(gbpAscii, PLbtcEth+PLaltCoin, gbpAscii, CBbtcEth+CBaltCoin, (PLbtcEth+PLaltCoin)/(CBbtcEth+CBaltCoin)*100)
-email_body += "\n"
+#email_body += "p/l btc and eth = {:}{:8.2f} (calculated per individual coin; cost basis = {:}{:8.2f}, roi = {:8.2f}%)\n".format(gbpAscii, PLbtcEth, gbpAscii, CBbtcEth, PLbtcEth/CBbtcEth*100)
+#email_body += "p/l altcoins    = {:}{:8.2f} (calculated per individual coin; cost basis = {:}{:8.2f}, roi = {:8.2f}%)\n".format(gbpAscii, PLaltCoin, gbpAscii, CBaltCoin, PLaltCoin/CBaltCoin*100)
+#email_body += "p/l total       = {:}{:8.2f} (calculated per individual coin; cost basis = {:}{:8.2f}, roi = {:8.2f}%)\n".format(gbpAscii, PLbtcEth+PLaltCoin, gbpAscii, CBbtcEth+CBaltCoin, (PLbtcEth+PLaltCoin)/(CBbtcEth+CBaltCoin)*100)
+#email_body += "\n"
 
 # roi
 email_body += "total overall purchase cost = {:}{:8.2f} (calculated per tranche)\n".format(gbpAscii, amountPaidForAllCryptoGbp)
