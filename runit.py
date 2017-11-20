@@ -243,7 +243,7 @@ CBaltCoin = float(0)
 PLbtcEth  = float(0)
 PLaltCoin = float(0)
 for x in arr:
-    email_body += "totValOf {:8.2f} {:3} = ${:8.2f} = {:}{:8.2f} (costBasis: {:}{:6.1f}, p/l: {:}{:6.1f}, roi: {:7.2f}%, avgCostPerCoin: {:}{:6.1f} (${:6.1f}))\n".format(x["abs"],symbol_format(x),x["curvalUsd"],gbpAscii, x["curvalGbp"], gbpAscii, x["costBasisGbp"], gbpAscii, x["curvalGbp"]-x["costBasisGbp"], calc_roi_dict(x), gbpAscii, x["costBasisGbp"]/x["abs"], x["costBasisGbp"]/x["abs"]*cable)
+    email_body += "totValOf {:8.2f} {:3} = ${:8.2f} = {:}{:8.2f} (costBasis: {:}{:8.2f}, p/l: {:}{:8.2f}, roi: {:8.2f}%, avgCostPerCoin: {:}{:8.2f} (${:8.2f}))\n".format(x["abs"],symbol_format(x),x["curvalUsd"],gbpAscii, x["curvalGbp"], gbpAscii, x["costBasisGbp"], gbpAscii, x["curvalGbp"]-x["costBasisGbp"], calc_roi_dict(x), gbpAscii, x["costBasisGbp"]/x["abs"], x["costBasisGbp"]/x["abs"]*cable)
     if x["symbol"] == "btc" or x["symbol"] == "eth":
         CBbtcEth += x["costBasisGbp"]
         PLbtcEth += x["curvalGbp"]-x["costBasisGbp"]
