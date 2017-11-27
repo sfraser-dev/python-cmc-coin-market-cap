@@ -224,7 +224,7 @@ neoDict = { "ticker":"neo",
             "7days":float(0),
             "costBasisGbp":float(1064.50)}          # T7 
 ###############################################
-sc6DictHardcodeLoss = { "ticker":"sc6",
+sc6LossDictHardcode = { "ticker":"",
             "symbol":"sc6",
             "abs":float(1),
             "usd":float(0),
@@ -234,7 +234,7 @@ sc6DictHardcodeLoss = { "ticker":"sc6",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(1520.84)}      # small coins 6 (sc6) that I lost money on in T7 (6 altcoins: omg, pay, bnb. bmt, lsk, iota)
+            "costBasisGbp":float(1520.84)}      # 6 small coins (sc6) that I lost money on in T7 (6 altcoins: omg, pay, bnb. bmt, lsk, iota)
 ###############################################
 get_price_from_cmc(btcDict, cable)
 get_price_from_cmc(ethDict, cable)
@@ -243,7 +243,7 @@ get_price_from_cmc(bchDict, cable)
 get_price_from_cmc(neoDict, cable)
 # HARDCODED -- get_price_from_cmc(sc6DictHardcode, cable)
 # create an array of crypto dictionaries (and the loss from sc6)
-arr = [btcDict, ethDict, xmrDict, bchDict, neoDict, sc6DictHardcodeLoss]
+arr = [btcDict, ethDict, xmrDict, bchDict, neoDict, sc6LossDictHardcode]
 
 totalUsd = float(0)
 totalGbp = float(0)
