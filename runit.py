@@ -165,10 +165,10 @@ email_body += "market vol = ${:8.2f}B = {:}{:8.2f}B (in the last 24h)\n".format(
 email_body += "\n"
 
 ########################### add new coins here #################################
-amountPaidForAllCryptoGbp = float(598.42+3030+(2520-1150.39+67)+1000+3000)
+amountPaidForAllCryptoGbp = float(598.42+3030+(2520-1150.39+67)+(1000+15.01)+(3000+14.61)+(1000+0))
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
-            "abs":float(2.01278137), 
+            "abs":float(2.01278971), 
             "usd":float(0), 
             "gbp":float(0), 
             "curvalUsd":float(0), 
@@ -176,7 +176,7 @@ btcDict = { "ticker":"bitcoin",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(229.02+2230.03)}    # T1-T6, T7
+            "costBasisGbp":float(229.02+2230.03)}    # T1-T6 + T7
 ethDict = { "ticker":"ethereum",
             "symbol":"eth",
             "abs":float(34.80491069),
@@ -187,10 +187,10 @@ ethDict = { "ticker":"ethereum",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(369.40+1847.85)}    # T1-T6, T7
+            "costBasisGbp":float(369.40+1847.85)}    # T1-T6 + T7
 xmrDict = { "ticker":"monero",
             "symbol":"xmr",
-            "abs":float(17.9680808),
+            "abs":float(25.87977261),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
@@ -198,7 +198,7 @@ xmrDict = { "ticker":"monero",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(1803.39)}
+            "costBasisGbp":float(1803.39)+1000}
 bchDict = { "ticker":"bitcoin-cash",
             "symbol":"bch",
             "abs":float(1.52451799),
@@ -221,13 +221,25 @@ neoDict = { "ticker":"neo",
             "24hrs":float(0),
             "7days":float(0),
             "costBasisGbp":float(1064.50)}
+sc6DictHardcode = { "ticker":"sc6",
+            "symbol":"sc6",
+            "abs":float(1),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
+            "costBasisGbp":float(1520.84)}      # small coins 6 that I lost money on in T7 (altcoins)
 get_price_from_cmc(btcDict, cable)
 get_price_from_cmc(ethDict, cable)
 get_price_from_cmc(xmrDict, cable)
 get_price_from_cmc(bchDict, cable)
 get_price_from_cmc(neoDict, cable)
-# create an array of crypto dictionaries
-arr = [btcDict, ethDict, xmrDict, bchDict, neoDict]
+# HARDCODED -- get_price_from_cmc(sc6DictHardcode, cable)
+# create an array of crypto dictionaries (and the loss from sc6)
+arr = [btcDict, ethDict, xmrDict, bchDict, neoDict, sc6DictHardcode]
 
 totalUsd = float(0)
 totalGbp = float(0)
@@ -250,10 +262,6 @@ for x in arr:
     else:
         CBaltCoin += x["costBasisGbp"]
         PLaltCoin += x["curvalGbp"]-x["costBasisGbp"]
-#email_body += "p/l btc and eth = {:}{:8.2f} (calculated per individual coin; cost basis = {:}{:8.2f}, roi = {:8.2f}%)\n".format(gbpAscii, PLbtcEth, gbpAscii, CBbtcEth, PLbtcEth/CBbtcEth*100)
-#email_body += "p/l altcoins    = {:}{:8.2f} (calculated per individual coin; cost basis = {:}{:8.2f}, roi = {:8.2f}%)\n".format(gbpAscii, PLaltCoin, gbpAscii, CBaltCoin, PLaltCoin/CBaltCoin*100)
-#email_body += "p/l total       = {:}{:8.2f} (calculated per individual coin; cost basis = {:}{:8.2f}, roi = {:8.2f}%)\n".format(gbpAscii, PLbtcEth+PLaltCoin, gbpAscii, CBbtcEth+CBaltCoin, (PLbtcEth+PLaltCoin)/(CBbtcEth+CBaltCoin)*100)
-#email_body += "\n"
 
 # roi
 email_body += "total overall purchase cost = {:}{:8.2f} (calculated per tranche)\n".format(gbpAscii, amountPaidForAllCryptoGbp)
