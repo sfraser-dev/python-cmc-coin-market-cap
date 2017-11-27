@@ -165,7 +165,9 @@ email_body += "market vol = ${:8.2f}B = {:}{:8.2f}B (in the last 24h)\n".format(
 email_body += "\n"
 
 ########################### add new coins here #################################
-amountPaidForAllCryptoGbp = float(598.42+3030+(2520-1150.39+67)+(1000+15.01)+(3000+14.61)+(1000+0))
+amountPaidForAllCryptoGbp = float( (598.42+3030+(2520-1150.39+67)) + (1000+15.01+3000+14.61))     # T1-T6 + T7
+amountPaidForAllCryptoGbp += float((1000+0))        # T8
+
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
             "abs":float(2.01278971), 
@@ -198,7 +200,7 @@ xmrDict = { "ticker":"monero",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(1803.39)+1000}
+            "costBasisGbp":float(1803.39+(1000+0))} # T7 + T8
 bchDict = { "ticker":"bitcoin-cash",
             "symbol":"bch",
             "abs":float(1.52451799),
@@ -209,7 +211,7 @@ bchDict = { "ticker":"bitcoin-cash",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(0.00)}
+            "costBasisGbp":float(0.00)}             # T7 (no cost, free from blockchain split)
 neoDict = { "ticker":"neo",
             "symbol":"neo",
             "abs":float(70.30806569),
@@ -220,8 +222,9 @@ neoDict = { "ticker":"neo",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(1064.50)}
-sc6DictHardcode = { "ticker":"sc6",
+            "costBasisGbp":float(1064.50)}          # T7 
+###############################################
+sc6DictHardcodeLoss = { "ticker":"sc6",
             "symbol":"sc6",
             "abs":float(1),
             "usd":float(0),
@@ -231,7 +234,8 @@ sc6DictHardcode = { "ticker":"sc6",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(1520.84)}      # small coins 6 that I lost money on in T7 (altcoins)
+            "costBasisGbp":float(1520.84)}      # small coins 6 (sc6) that I lost money on in T7 (6 altcoins: omg, pay, bnb. bmt, lsk, iota)
+###############################################
 get_price_from_cmc(btcDict, cable)
 get_price_from_cmc(ethDict, cable)
 get_price_from_cmc(xmrDict, cable)
@@ -239,7 +243,7 @@ get_price_from_cmc(bchDict, cable)
 get_price_from_cmc(neoDict, cable)
 # HARDCODED -- get_price_from_cmc(sc6DictHardcode, cable)
 # create an array of crypto dictionaries (and the loss from sc6)
-arr = [btcDict, ethDict, xmrDict, bchDict, neoDict, sc6DictHardcode]
+arr = [btcDict, ethDict, xmrDict, bchDict, neoDict, sc6DictHardcodeLoss]
 
 totalUsd = float(0)
 totalGbp = float(0)
