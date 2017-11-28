@@ -234,7 +234,7 @@ sc6LossDictHardcode = { "ticker":"",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(1520.84)}      # 6 small coins (sc6) that I lost money on in T7 (6 altcoins: omg, pay, bnb. bmt, lsk, iota)
+            "costBasisGbp":float(1520.84+15.01+14.61)}      # 6 small coins (sc6) that I lost money on in T7 (6 altcoins: omg, pay, bnb. bmt, lsk, iota)
 ###############################################
 get_price_from_cmc(btcDict, cable)
 get_price_from_cmc(ethDict, cable)
