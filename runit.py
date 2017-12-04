@@ -212,6 +212,17 @@ bchDict = { "ticker":"bitcoin-cash",
             "24hrs":float(0),
             "7days":float(0),
             "costBasisGbp":float(0.00)}             # T7 (no cost, free from blockchain split)
+btgDict = { "ticker":"bitcoin-gold",
+            "symbol":"btg",
+            "abs":float(1.71581177),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
+            "costBasisGbp":float(0.00)}             # T8 (no cost, free from blockchain split)
 neoDict = { "ticker":"neo",
             "symbol":"neo",
             "abs":float(70.30806569),
@@ -240,10 +251,11 @@ get_price_from_cmc(btcDict, cable)
 get_price_from_cmc(ethDict, cable)
 get_price_from_cmc(xmrDict, cable)
 get_price_from_cmc(bchDict, cable)
+get_price_from_cmc(btgDict, cable)
 get_price_from_cmc(neoDict, cable)
 # HARDCODED -- get_price_from_cmc(sc6DictHardcode, cable)
 # create an array of crypto dictionaries (and the loss from sc6)
-arr = [btcDict, ethDict, xmrDict, bchDict, neoDict, sc6LossDictHardcode]
+arr = [btcDict, ethDict, xmrDict, bchDict, btgDict, neoDict, sc6LossDictHardcode]
 
 totalUsd = float(0)
 totalGbp = float(0)
