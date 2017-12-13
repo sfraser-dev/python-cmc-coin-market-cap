@@ -141,8 +141,10 @@ passwd_cmcwatcher = options.passwd
 #print allCoins
 
 # get gbp/usd
-cable   = float(myFx.get_rate('GBP','USD'))
-chunnel = float(myFx.get_rate('EUR','GBP'))
+cable       = float(myFx.get_rate('GBP','USD'))
+cable_rev   = float(myFx.get_rate('USD','GBP'))
+chunnel     = float(myFx.get_rate('EUR','GBP'))
+chunnel_rev = float(myFx.get_rate('GBP','EUR'))
 
 # python 2.7 is ascii by default (ie: no GBP £ sign)
 gbpUnicode = unichr(163)
@@ -153,6 +155,8 @@ now = datetime.datetime.now()
 dateTime = now.strftime("%Y-%m-%d %H:%M")
 email_body = "date and time: {}\n".format(dateTime)
 email_body += "gbp/usd: {:.4f}\n".format(cable)
+email_body += "gbp/eur: {:.4f}\n".format(chunnel_rev)
+email_body += "usd/gbp: {:.4f}\n".format(cable_rev)
 email_body += "eur/gbp: {:.4f}\n\n".format(chunnel)
 
 # curly brace = dictionary/sets; square bracket = list/array
