@@ -164,8 +164,8 @@ email_body += "eur/gbp: {:.4f}\n\n".format(chunnel)
 myStats = coinmarketcap.stats()
 marketCap = float(get_market_cap(myStats))
 marketVol = float(get_market_vol(myStats))
-email_body += "market cap = ${:8.2f}B = {:}{:8.2f}B\n".format(marketCap/1000000000, gbpAscii, (marketCap/1000000000)/cable)
-email_body += "market vol = ${:8.2f}B = {:}{:8.2f}B (in the last 24h)\n".format(marketVol/1000000000, gbpAscii, (marketVol/1000000000)/cable)
+email_body += "market cap = ${:10.2f}B = {:}{:10.2f}B\n".format(marketCap/1000000000, gbpAscii, (marketCap/1000000000)/cable)
+email_body += "market vol = ${:10.2f}B = {:}{:10.2f}B (in the last 24h)\n".format(marketVol/1000000000, gbpAscii, (marketVol/1000000000)/cable)
 email_body += "\n"
 
 ########################### add new coins here #################################
@@ -265,7 +265,7 @@ totalUsd = float(0)
 totalGbp = float(0)
 # loop through the array of dictionaries, get spot prices of owned crypto
 for x in arr:
-    email_body += "{} price = ${:8.2f} = {:}{:8.2f}, 1hr={:8.2f}%, 24hrs={:8.2f}%, 7days={:8.2f}%\n".format(symbol_format(x), x["usd"], gbpAscii, x["gbp"], x["1hr"], x["24hrs"], x["7days"])
+    email_body += "{:} price = ${:10.2f} = {:}{:10.2f}, 1hr={:10.2f}%, 24hrs={:10.2f}%, 7days={:10.2f}%\n".format(symbol_format(x), x["usd"], gbpAscii, x["gbp"], x["1hr"], x["24hrs"], x["7days"])
     totalUsd += x["curvalUsd"]
     totalGbp += x["curvalGbp"]
 email_body += "\n"
@@ -275,7 +275,7 @@ CBaltCoin = float(0)
 PLbtcEth  = float(0)
 PLaltCoin = float(0)
 for x in arr:
-    email_body += "totValOf {:8.2f} {:3} = ${:8.2f} = {:}{:8.2f} (costBasis: {:}{:8.2f}, p/l: {:}{:8.2f}, roi: {:8.2f}%, avgCostPerCoin: {:}{:8.2f} (${:8.2f}))\n".format(x["abs"],symbol_format(x),x["curvalUsd"],gbpAscii, x["curvalGbp"], gbpAscii, x["costBasisGbp"], gbpAscii, x["curvalGbp"]-x["costBasisGbp"], calc_roi_dict(x), gbpAscii, x["costBasisGbp"]/x["abs"], x["costBasisGbp"]/x["abs"]*cable)
+    email_body += "totValOf {:7.2f} {:3} = ${:10.2f} = {:}{:10.2f} (costBasis: {:}{:10.2f}, p/l: {:}{:10.2f}, roi: {:10.2f}%, avgCostPerCoin: {:}{:10.2f} (${:10.2f}))\n".format(x["abs"],symbol_format(x),x["curvalUsd"],gbpAscii, x["curvalGbp"], gbpAscii, x["costBasisGbp"], gbpAscii, x["curvalGbp"]-x["costBasisGbp"], calc_roi_dict(x), gbpAscii, x["costBasisGbp"]/x["abs"], x["costBasisGbp"]/x["abs"]*cable)
     if x["symbol"] == "btc" or x["symbol"] == "eth":
         CBbtcEth += x["costBasisGbp"]
         PLbtcEth += x["curvalGbp"]-x["costBasisGbp"]
@@ -284,11 +284,11 @@ for x in arr:
         PLaltCoin += x["curvalGbp"]-x["costBasisGbp"]
 
 # roi
-email_body += "total overall purchase cost = {:}{:8.2f} (calculated per tranche)\n".format(gbpAscii, amountPaidForAllCryptoGbp)
-email_body += "total overall value         = {:}{:8.2f} (calculated per tranche)\n".format(gbpAscii, totalGbp)
+email_body += "total overall purchase cost = {:}{:10.2f} (calculated per tranche)\n".format(gbpAscii, amountPaidForAllCryptoGbp)
+email_body += "total overall value         = {:}{:10.2f} (calculated per tranche)\n".format(gbpAscii, totalGbp)
 roi = ((totalGbp - amountPaidForAllCryptoGbp) / amountPaidForAllCryptoGbp) * 100
-email_body += "total overall p/l           = {:}{:8.2f} (calculated per tranche)\n".format(gbpAscii, totalGbp-amountPaidForAllCryptoGbp)
-email_body += "total overall roi = {:8.2f}%\n".format(roi)
+email_body += "total overall p/l           = {:}{:10.2f} (calculated per tranche)\n".format(gbpAscii, totalGbp-amountPaidForAllCryptoGbp)
+email_body += "total overall roi = {:10.2f}%\n".format(roi)
 
 # create email subject, print info (email body and subject) and send email
 # add market cap and market volume information to email subject
