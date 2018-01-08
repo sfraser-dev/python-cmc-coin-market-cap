@@ -127,7 +127,7 @@ def calc_roi_dict(dic):
         roi = float('Inf')
     return roi*100
 
-### main
+### main 
 parser = OptionParser(usage='usage: %prog -p PASSWD')
 parser.add_option("-p", dest="passwd",
                     help="PASSWD for email server", metavar="PASSWD")
@@ -137,6 +137,7 @@ if not options.passwd:
    sys.exit(2)
 passwd_cmcwatcher = options.passwd
 
+# debug: use to get symbols and tickers for newly added coins
 #allCoins = coinmarketcap.ticker()
 #print allCoins
 
@@ -170,11 +171,11 @@ email_body += "\n"
 
 ########################### add new coins here #################################
 amountPaidForAllCryptoGbp = float( (598.42+3030+(2520-1150.39+67)) + (1000+15.01+3000+14.61))     # T1-T6 + T7
-amountPaidForAllCryptoGbp += float((1000+0))        # T8
+amountPaidForAllCryptoGbp += float((1000+0+0+1300))        # T8 (£1000 xmr, free btg, free gas, £1300 xrp)
 
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
-            "abs":float(2.01278971), 
+            "abs":float(2.01278137), 
             "usd":float(0), 
             "gbp":float(0), 
             "curvalUsd":float(0), 
@@ -227,6 +228,17 @@ btgDict = { "ticker":"bitcoin-gold",
             "24hrs":float(0),
             "7days":float(0),
             "costBasisGbp":float(0.00)}             # T8 (no cost, free from blockchain split)
+gasDict = { "ticker":"gas",
+            "symbol":"gas",
+            "abs":float(3.0585122),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
+            "costBasisGbp":float(0.00)}             # T8 (no cost, free from neon wallet)
 neoDict = { "ticker":"neo",
             "symbol":"neo",
             "abs":float(70.30806569),
@@ -238,6 +250,17 @@ neoDict = { "ticker":"neo",
             "24hrs":float(0),
             "7days":float(0),
             "costBasisGbp":float(1064.50)}          # T7 
+xrpDict = { "ticker":"ripple",
+            "symbol":"xrp",
+            "abs":float(626.349131),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
+            "costBasisGbp":float(1300.00)}          # T8 
 ###############################################
 sc6LossDictHardcode = { "ticker":"",
             "symbol":"sc6",
@@ -256,10 +279,12 @@ get_price_from_cmc(ethDict, cable)
 get_price_from_cmc(xmrDict, cable)
 get_price_from_cmc(bchDict, cable)
 get_price_from_cmc(btgDict, cable)
+get_price_from_cmc(gasDict, cable)
 get_price_from_cmc(neoDict, cable)
+get_price_from_cmc(xrpDict, cable)
 # HARDCODED -- get_price_from_cmc(sc6DictHardcode, cable)
 # create an array of crypto dictionaries (and the loss from sc6)
-arr = [btcDict, ethDict, xmrDict, bchDict, btgDict, neoDict, sc6LossDictHardcode]
+arr = [btcDict, ethDict, xmrDict, bchDict, btgDict, gasDict, neoDict, xrpDict, sc6LossDictHardcode]
 
 totalUsd = float(0)
 totalGbp = float(0)
@@ -284,10 +309,10 @@ for x in arr:
         PLaltCoin += x["curvalGbp"]-x["costBasisGbp"]
 
 # roi
-email_body += "total overall purchase cost = {:}{:10.2f} (calculated per tranche)\n".format(gbpAscii, amountPaidForAllCryptoGbp)
-email_body += "total overall value         = {:}{:10.2f} (calculated per tranche)\n".format(gbpAscii, totalGbp)
+email_body += "total overall purchase cost = {:}{:10.2f} (calculated per tranche) (${:10.2f})\n".format(gbpAscii, amountPaidForAllCryptoGbp, (amountPaidForAllCryptoGbp*cable))
+email_body += "total overall value         = {:}{:10.2f} (calculated per tranche) (${:10.2f})\n".format(gbpAscii, totalGbp, (totalGbp*cable))
 roi = ((totalGbp - amountPaidForAllCryptoGbp) / amountPaidForAllCryptoGbp) * 100
-email_body += "total overall p/l           = {:}{:10.2f} (calculated per tranche)\n".format(gbpAscii, totalGbp-amountPaidForAllCryptoGbp)
+email_body += "total overall p/l           = {:}{:10.2f} (calculated per tranche) (${:10.2f})\n".format(gbpAscii, totalGbp-amountPaidForAllCryptoGbp, ((totalGbp-amountPaidForAllCryptoGbp)*cable))
 email_body += "total overall roi = {:10.2f}%\n".format(roi)
 
 # create email subject, print info (email body and subject) and send email
