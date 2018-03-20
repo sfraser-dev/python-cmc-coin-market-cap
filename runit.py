@@ -170,12 +170,18 @@ email_body += "market vol = ${:10.2f}B = {:}{:10.2f}B (in the last 24h)\n".forma
 email_body += "\n"
 
 ########################### add new coins here #################################
-amountPaidForAllCryptoGbp = float( (598.42+3030+(2520-1150.39+67)) + (1000+15.01+3000+14.61))     # T1-T6 + T7
-amountPaidForAllCryptoGbp += float((1000+0+0+1300))        # T8 (£1000 xmr, free btg, free gas, £1300 xrp)
+# cgt: cost basis for CGT calculation, T1 to T9 (note: two sells so two subtractions)
+# cgt: selling X% of crypto reduces cost basis by X% (done by calculating BTC reserve cost basis and selling price)
+# cgt: buying and selling at different times will adjust this percentage
+cgtCostBasisForAllCryptoGbp = float(1698.84+2020.00+8509.00+5020.00-15147.52+8496.23+2300.00-4700.01)
+# skin: T1-T6 profit of £598.42 summary + cost basis of subsequent tranches
+# skin: absolute value of capital in minus capital out (getting in early gave large profits; my later trading gave losses)
+# skin: this is why skin shows I have pulled out a profit and still have crypto, whereas cgt shows I still have a cost basis for the crypto
+skinInTheGameGbp = float(598.42+8496.23+2300.00-12558.59)                                               
 
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
-            "abs":float(2.01278137), 
+            "abs":float(2.01278137-1.1130521), 
             "usd":float(0), 
             "gbp":float(0), 
             "curvalUsd":float(0), 
@@ -183,10 +189,10 @@ btcDict = { "ticker":"bitcoin",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(229.02+2230.03)}    # T1-T6 + T7
+            "costBasisGbp":float((229.02+2230.03)*(1-0.5530))}    # (T1-T6 + T7) multiplied by T9
 ethDict = { "ticker":"ethereum",
             "symbol":"eth",
-            "abs":float(34.80491069),
+            "abs":float(34.80491069-18.0814),
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
@@ -194,7 +200,7 @@ ethDict = { "ticker":"ethereum",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(369.40+1847.85)}    # T1-T6 + T7
+            "costBasisGbp":float((369.40+1847.85)*(1-0.5184))}    # (T1-T6 + T7) multiplied by T9
 xmrDict = { "ticker":"monero",
             "symbol":"xmr",
             "abs":float(25.87977261),
@@ -206,6 +212,17 @@ xmrDict = { "ticker":"monero",
             "24hrs":float(0),
             "7days":float(0),
             "costBasisGbp":float(1803.39+(1000+0))} # T7 + T8
+xrpDict = { "ticker":"ripple",
+            "symbol":"xrp",
+            "abs":float(626.349131),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
+            "costBasisGbp":float(1300.00)}          # T8 
 bchDict = { "ticker":"bitcoin-cash",
             "symbol":"bch",
             "abs":float(1.52451799),
@@ -217,6 +234,17 @@ bchDict = { "ticker":"bitcoin-cash",
             "24hrs":float(0),
             "7days":float(0),
             "costBasisGbp":float(0.00)}             # T7 (no cost, free from blockchain split)
+neoDict = { "ticker":"neo",
+            "symbol":"neo",
+            "abs":float(70.30806569),
+            "usd":float(0),
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
+            "costBasisGbp":float(1064.50)}          # T7 
 btgDict = { "ticker":"bitcoin-gold",
             "symbol":"btg",
             "abs":float(1.71581177),
@@ -239,28 +267,6 @@ gasDict = { "ticker":"gas",
             "24hrs":float(0),
             "7days":float(0),
             "costBasisGbp":float(0.00)}             # T8 (no cost, free from neon wallet)
-neoDict = { "ticker":"neo",
-            "symbol":"neo",
-            "abs":float(70.30806569),
-            "usd":float(0),
-            "gbp":float(0),
-            "curvalUsd":float(0),
-            "curvalGbp":float(0),
-            "1hr":float(0),
-            "24hrs":float(0),
-            "7days":float(0),
-            "costBasisGbp":float(1064.50)}          # T7 
-xrpDict = { "ticker":"ripple",
-            "symbol":"xrp",
-            "abs":float(626.349131),
-            "usd":float(0),
-            "gbp":float(0),
-            "curvalUsd":float(0),
-            "curvalGbp":float(0),
-            "1hr":float(0),
-            "24hrs":float(0),
-            "7days":float(0),
-            "costBasisGbp":float(1300.00)}          # T8 
 ###############################################
 sc6LossDictHardcode = { "ticker":"",
             "symbol":"sc6",
@@ -309,11 +315,12 @@ for x in arr:
         PLaltCoin += x["curvalGbp"]-x["costBasisGbp"]
 
 # roi
-email_body += "total overall purchase cost = {:}{:10.2f} (calculated per tranche) (${:10.2f})\n".format(gbpAscii, amountPaidForAllCryptoGbp, (amountPaidForAllCryptoGbp*cable))
-email_body += "total overall value         = {:}{:10.2f} (calculated per tranche) (${:10.2f})\n".format(gbpAscii, totalGbp, (totalGbp*cable))
-roi = ((totalGbp - amountPaidForAllCryptoGbp) / amountPaidForAllCryptoGbp) * 100
-email_body += "total overall p/l           = {:}{:10.2f} (calculated per tranche) (${:10.2f})\n".format(gbpAscii, totalGbp-amountPaidForAllCryptoGbp, ((totalGbp-amountPaidForAllCryptoGbp)*cable))
-email_body += "total overall roi = {:10.2f}%\n".format(roi)
+email_body += "total cgt purchase cost = {:}{:10.2f} (calculated per tranche) (${:10.2f})\n".format(gbpAscii, cgtCostBasisForAllCryptoGbp, (cgtCostBasisForAllCryptoGbp*cable))
+email_body += "total cgt value         = {:}{:10.2f} (calculated per tranche) (${:10.2f})\n".format(gbpAscii, totalGbp, (totalGbp*cable))
+roi = ((totalGbp - cgtCostBasisForAllCryptoGbp) / cgtCostBasisForAllCryptoGbp) * 100
+email_body += "total cgt p/l           = {:}{:10.2f} (calculated per tranche) (${:10.2f})\n".format(gbpAscii, totalGbp-cgtCostBasisForAllCryptoGbp, ((totalGbp-cgtCostBasisForAllCryptoGbp)*cable))
+email_body += "total cgt roi           = {:10.2f}%\n".format(roi)
+email_body += "skin in the game        = {:}{:10.2f} (${:10.2f})\n".format(gbpAscii, skinInTheGameGbp, (skinInTheGameGbp*cable))
 
 # create email subject, print info (email body and subject) and send email
 # add market cap and market volume information to email subject
