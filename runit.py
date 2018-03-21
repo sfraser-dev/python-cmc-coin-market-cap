@@ -173,11 +173,11 @@ email_body += "\n"
 # cgt: cost basis for CGT calculation, T1 to T9 (note: two sells so two subtractions)
 # cgt: selling X% of crypto reduces cost basis by X% (done by calculating BTC reserve cost basis and selling price)
 # cgt: buying and selling at different times will adjust this percentage
-cgtCostBasisForAllCryptoGbp = float(1698.84+2020.00+8509.00+5020.00-15147.52+8496.23+2300.00-4700.01)
+cgtCostBasisForAllCryptoGbp = float(1698.84+2020.00+8509.00+5020.00-15147.52+8496.23+2300.00-4674.48)
 # skin: T1-T6 profit of £598.42 summary + cost basis of subsequent tranches
 # skin: absolute value of capital in minus capital out (getting in early gave large profits; my later trading gave losses)
 # skin: this is why skin shows I have pulled out a profit and still have crypto, whereas cgt shows I still have a cost basis for the crypto
-skinInTheGameGbp = float(598.42+8496.23+2300.00-12558.59)                                               
+skinInTheGameGbp = float(598.42+8496.23+2300.00-12533.06)                                               
 
 btcDict = { "ticker":"bitcoin", 
             "symbol":"btc", 
@@ -290,7 +290,7 @@ get_price_from_cmc(neoDict, cable)
 get_price_from_cmc(xrpDict, cable)
 # HARDCODED -- get_price_from_cmc(sc6DictHardcode, cable)
 # create an array of crypto dictionaries (and the loss from sc6)
-arr = [btcDict, ethDict, xmrDict, bchDict, btgDict, gasDict, neoDict, xrpDict, sc6LossDictHardcode]
+arr = [btcDict, ethDict, xmrDict, xrpDict, bchDict, neoDict, btgDict, gasDict, sc6LossDictHardcode]
 
 totalUsd = float(0)
 totalGbp = float(0)
