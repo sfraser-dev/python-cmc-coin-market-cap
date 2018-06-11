@@ -4,7 +4,7 @@
 # using Anaconda Python
 
 # https://github.com/mrsmn/coinmarketcap-api
-# https://pypi.python.org/pypi/forex-python
+# https://pypi.python.org/pypi/forex-python (jumped from v0.3.3 to v1.0.0; new source "ratesapi.io")
 
 import sys
 import pprint
