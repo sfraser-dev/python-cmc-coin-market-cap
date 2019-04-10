@@ -1,0 +1,2 @@
+/usr/local/lib/python2.7/dist-packages/coinmarketcap-5.0.3-py2.7.egg
+/usr/local/bin/chardetect

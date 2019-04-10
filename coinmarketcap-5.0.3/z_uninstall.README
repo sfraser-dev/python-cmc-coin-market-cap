@@ -1,0 +1,3 @@
+https://stackoverflow.com/questions/1550226/python-setup-py-uninstall
+
+>> python setup.py install --record z_filesToDelToUninstall.txt
