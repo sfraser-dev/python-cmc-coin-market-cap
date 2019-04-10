@@ -140,6 +140,7 @@ passwd_cmcwatcher = options.passwd
 # debug: use to get symbols and tickers for newly added coins
 #allCoins = coinmarketcap.ticker()
 #print allCoins
+#sys.exit(0)
 
 # get gbp/usd
 cable       = float(myFx.get_rate('GBP','USD'))
