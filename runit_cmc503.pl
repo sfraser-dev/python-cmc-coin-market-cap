@@ -11,10 +11,27 @@ import pprint
 import smtplib
 import datetime
 import requests
+from requests import Request, Session
+import json
 
+# 04, coin data, neatly access data for a coin by naming that coin
 key_cmc503 = '2c6b43a8-fdf9-4305-b527-32555cd28db1'
 api_cmc503_cryptos = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY='
 api_cmc503_cryptos += key_cmc503
+
+# 01, coin data, return all data as a single (large) string
+more100_api_cmc503_cryptos = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
+more100_params = {
+    'start': '1',
+    'limit': '5000',
+    'convert': 'USD',
+}
+more100_headers = {
+    'Accepts': 'application/json',
+    'X-CMC_PRO_API_KEY': '2c6b43a8-fdf9-4305-b527-32555cd28db1',
+}
+
+# mine, global data, return global data a single string
 api_cmc503_globs = 'https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/latest?CMC_PRO_API_KEY='
 api_cmc503_globs += key_cmc503
 
@@ -173,14 +190,26 @@ email_body += "eur/gbp: {:.4f}\n\n".format(chunnel)
 #myStats = coinmarketcap.stats()
 #marketCap = float(get_market_cap(myStats))
 #marketVol = float(get_market_vol(myStats))
-raw_data_cmc503_cryptos = requests.get(api_cmc503_cryptos).json()
-data_cmc503_cryptos = raw_data_cmc503_cryptos['data']
-status_cmc503_cryptos = raw_data_cmc503_cryptos['status']
-
+# 01 coin data
+session = Session()
+session.headers.update(more100_headers)
+response = session.get(more100_api_cmc503_cryptos, params=more100_params)
+more100_data=json.loads(response.text)
+print(more100_data)
+print 
+print 
+print 
+# mine, global data
 raw_data_cmc503_globs = requests.get(api_cmc503_globs).json()
 data_cmc503_globs = raw_data_cmc503_globs['data']
 print data_cmc503_globs
-
+print 
+print 
+print 
+# 04 coin data
+raw_data_cmc503_cryptos = requests.get(api_cmc503_cryptos).json()
+data_cmc503_cryptos = raw_data_cmc503_cryptos['data']
+status_cmc503_cryptos = raw_data_cmc503_cryptos['status']
 for currency_cmc503 in data_cmc503_cryptos:
     coin_name_cmc503 = currency_cmc503['name']
     coin_price_cmc503 = currency_cmc503['quote']['USD']['price']
@@ -190,6 +219,30 @@ for currency_cmc503 in data_cmc503_cryptos:
         print coin_price_cmc503
         print coin_marketcap_cmc503
     if coin_name_cmc503 == 'Ethereum':
+        print coin_name_cmc503
+        print coin_price_cmc503
+        print coin_marketcap_cmc503
+    if coin_name_cmc503 == 'Monero':
+        print coin_name_cmc503
+        print coin_price_cmc503
+        print coin_marketcap_cmc503
+    if coin_name_cmc503 == 'XRP':
+        print coin_name_cmc503
+        print coin_price_cmc503
+        print coin_marketcap_cmc503
+    if coin_name_cmc503 == 'Bitcoin Cash':
+        print coin_name_cmc503
+        print coin_price_cmc503
+        print coin_marketcap_cmc503
+    if coin_name_cmc503 == 'NEO':
+        print coin_name_cmc503
+        print coin_price_cmc503
+        print coin_marketcap_cmc503
+    if coin_name_cmc503 == 'Bitcoin Gold':
+        print coin_name_cmc503
+        print coin_price_cmc503
+        print coin_marketcap_cmc503
+    if coin_name_cmc503 == 'Gas':
         print coin_name_cmc503
         print coin_price_cmc503
         print coin_marketcap_cmc503
