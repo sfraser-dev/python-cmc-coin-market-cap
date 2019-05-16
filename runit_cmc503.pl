@@ -13,6 +13,7 @@ import datetime
 import requests
 from requests import Request, Session
 import json
+import pprint
 
 # 04, coin data, neatly access data for a coin by naming that coin
 key_cmc503 = '2c6b43a8-fdf9-4305-b527-32555cd28db1'
@@ -23,7 +24,7 @@ api_cmc503_cryptos += key_cmc503
 more100_api_cmc503_cryptos = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
 more100_params = {
     'start': '1',
-    'limit': '5000',
+    'limit': '3',
     'convert': 'USD',
 }
 more100_headers = {
@@ -68,6 +69,12 @@ def get_values_as_dict (longstring):
     return myDict
 
 def get_price_usd (longstring):
+    myDict = get_values_as_dict(longstring)
+    for key, value in myDict.items():
+        if "price_usd" in key:
+            return value
+
+def get_price_usd_cmc503 (longstring):
     myDict = get_values_as_dict(longstring)
     for key, value in myDict.items():
         if "price_usd" in key:
@@ -134,6 +141,16 @@ def get_price_from_cmc(dic, cable):
     dic["24hrs"]=float(get_change_24hrs(coinmarketcap.ticker(dic['ticker'])))
     dic["7days"]=float(get_change_7days(coinmarketcap.ticker(dic['ticker'])))
 
+def get_coin_data_cmc503(bigdict):
+    #pprint.pprint(bigdict)
+    print("length of dictionary is: %d" %len(bigdict['data']))
+    for ii in bigdict['data']:
+        print ii['name']
+        print
+    print (bigdict['data'][2]['name'])
+    print (bigdict['data'][1]['name'])
+    print (bigdict['data'][0]['name'])
+
 def symbol_format(dic):
     # only want sybols of three letters
     sym = dic["symbol"]
@@ -195,7 +212,8 @@ session = Session()
 session.headers.update(more100_headers)
 response = session.get(more100_api_cmc503_cryptos, params=more100_params)
 more100_data=json.loads(response.text)
-print(more100_data)
+get_coin_data_cmc503(more100_data)
+
 print 
 print 
 print 
@@ -206,46 +224,6 @@ print data_cmc503_globs
 print 
 print 
 print 
-# 04 coin data
-raw_data_cmc503_cryptos = requests.get(api_cmc503_cryptos).json()
-data_cmc503_cryptos = raw_data_cmc503_cryptos['data']
-status_cmc503_cryptos = raw_data_cmc503_cryptos['status']
-for currency_cmc503 in data_cmc503_cryptos:
-    coin_name_cmc503 = currency_cmc503['name']
-    coin_price_cmc503 = currency_cmc503['quote']['USD']['price']
-    coin_marketcap_cmc503 = currency_cmc503['quote']['USD']['market_cap']
-    if coin_name_cmc503 == 'Bitcoin':
-        print coin_name_cmc503
-        print coin_price_cmc503
-        print coin_marketcap_cmc503
-    if coin_name_cmc503 == 'Ethereum':
-        print coin_name_cmc503
-        print coin_price_cmc503
-        print coin_marketcap_cmc503
-    if coin_name_cmc503 == 'Monero':
-        print coin_name_cmc503
-        print coin_price_cmc503
-        print coin_marketcap_cmc503
-    if coin_name_cmc503 == 'XRP':
-        print coin_name_cmc503
-        print coin_price_cmc503
-        print coin_marketcap_cmc503
-    if coin_name_cmc503 == 'Bitcoin Cash':
-        print coin_name_cmc503
-        print coin_price_cmc503
-        print coin_marketcap_cmc503
-    if coin_name_cmc503 == 'NEO':
-        print coin_name_cmc503
-        print coin_price_cmc503
-        print coin_marketcap_cmc503
-    if coin_name_cmc503 == 'Bitcoin Gold':
-        print coin_name_cmc503
-        print coin_price_cmc503
-        print coin_marketcap_cmc503
-    if coin_name_cmc503 == 'Gas':
-        print coin_name_cmc503
-        print coin_price_cmc503
-        print coin_marketcap_cmc503
 
 email_body += "market cap = ${:10.2f}B = {:}{:10.2f}B\n".format(marketCap/1000000000, gbpAscii, (marketCap/1000000000)/cable)
 email_body += "market vol = ${:10.2f}B = {:}{:10.2f}B (in the last 24h)\n".format(marketVol/1000000000, gbpAscii, (marketVol/1000000000)/cable)
