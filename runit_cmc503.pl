@@ -141,7 +141,7 @@ def get_price_from_cmc(dic, cable):
     dic["24hrs"]=float(get_change_24hrs(coinmarketcap.ticker(dic['ticker'])))
     dic["7days"]=float(get_change_7days(coinmarketcap.ticker(dic['ticker'])))
 
-def get_coin_data_cmc503(coindict, bigdatadict, cable):
+def get_coin_data_cmc503(bigdatadict, cable):
     pprint.pprint(bigdatadict)
     print
     print("length of dictionary is: %d" %len(bigdatadict['data']))
@@ -224,7 +224,8 @@ print
 raw_data_cmc503_globs = requests.get(api_cmc503_globs).json()
 data_cmc503_globs = raw_data_cmc503_globs['data']
 print data_cmc503_globs
-print 
+print ("tot market cap=%10.2f" %((data_cmc503_globs['quote']['USD']['total_market_cap'])/1000000000))
+print ("tot volume 24h=%10.2f" %((data_cmc503_globs['quote']['USD']['total_volume_24h'])/1000000000))
 print 
 print 
 
