@@ -141,15 +141,18 @@ def get_price_from_cmc(dic, cable):
     dic["24hrs"]=float(get_change_24hrs(coinmarketcap.ticker(dic['ticker'])))
     dic["7days"]=float(get_change_7days(coinmarketcap.ticker(dic['ticker'])))
 
-def get_coin_data_cmc503(bigdict):
-    #pprint.pprint(bigdict)
-    print("length of dictionary is: %d" %len(bigdict['data']))
-    for ii in bigdict['data']:
+def get_coin_data_cmc503(coindict, bigdatadict, cable):
+    pprint.pprint(bigdatadict)
+    print
+    print("length of dictionary is: %d" %len(bigdatadict['data']))
+    for ii in bigdatadict['data']:
         print ii['name']
+        print ii['quote']['USD']['price']
+        print("cable=%.2f, price in GBP=%.2f" %(cable, (ii['quote']['USD']['price']*cable)))
+        print ii['quote']['USD']['percent_change_1h']
+        print ii['quote']['USD']['percent_change_24h']
+        print ii['quote']['USD']['percent_change_7d']
         print
-    print (bigdict['data'][2]['name'])
-    print (bigdict['data'][1]['name'])
-    print (bigdict['data'][0]['name'])
 
 def symbol_format(dic):
     # only want sybols of three letters
@@ -212,7 +215,7 @@ session = Session()
 session.headers.update(more100_headers)
 response = session.get(more100_api_cmc503_cryptos, params=more100_params)
 more100_data=json.loads(response.text)
-get_coin_data_cmc503(more100_data)
+get_coin_data_cmc503(more100_data, cable)
 
 print 
 print 
