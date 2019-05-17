@@ -141,17 +141,48 @@ def get_price_from_cmc(dic, cable):
     dic["24hrs"]=float(get_change_24hrs(coinmarketcap.ticker(dic['ticker'])))
     dic["7days"]=float(get_change_7days(coinmarketcap.ticker(dic['ticker'])))
 
-def get_coin_data_cmc503(bigdatadict, cable):
+#btcDict = { "ticker":"bitcoin", 
+#            "symbol":"btc", 
+#            "abs":float(2.01278137-1.1130521), 
+#            "usd":float(0), 
+#            "gbp":float(0), 
+#            "curvalUsd":float(0), 
+#            "curvalGbp":float(0),
+#            "1hr":float(0),
+#            "24hrs":float(0),
+#            "7days":float(0),
+#            "costBasisGbp":float((229.02+2230.03)*(1-0.5530))}    # (T1-T6 + T7) multiplied by T9
+def get_coin_data_cmc503(coindict, bigdatadict, cable):
     pprint.pprint(bigdatadict)
     print
     print("length of dictionary is: %d" %len(bigdatadict['data']))
     for ii in bigdatadict['data']:
-        print ii['name']
+        print ii['slug']
+        sslug = ii['slug']
+        print ii['symbol']
+        ssymbol = ii['symbol']
+        #print ii['name']
         print ii['quote']['USD']['price']
+        ppriceUSD = ii['quote']['USD']['price']
         print("cable=%.2f, price in GBP=%.2f" %(cable, (ii['quote']['USD']['price']*cable)))
+        ppriceGBP = ppriceUSD/cable
         print ii['quote']['USD']['percent_change_1h']
+        cchange1hr = ii['quote']['USD']['percent_change_1h']
         print ii['quote']['USD']['percent_change_24h']
+        cchange24hr = ii['quote']['USD']['percent_change_24h']
         print ii['quote']['USD']['percent_change_7d']
+        cchange7d = ii['quote']['USD']['percent_change_7d']
+        if (coindict['ticker']==sslug):
+            print ("ticker == sslug")
+            coindict['usd']=ppriceUSD
+            coindict['gbp']=ppriceGBP
+            coindict['curvalUsd']=ppriceUSD*coindict['abs']
+            coindict['curvalGbp']=ppriceGBP*coindict['abs']
+            coindict['1hr']=cchange1hr
+            coindict['24hrs']=cchange24hr
+            coindict['7days']=cchange7d
+            pprint.pprint(coindict)
+        print
         print
 
 def symbol_format(dic):
@@ -205,29 +236,13 @@ email_body += "gbp/eur: {:.4f}\n".format(chunnel_rev)
 email_body += "usd/gbp: {:.4f}\n".format(cable_rev)
 email_body += "eur/gbp: {:.4f}\n\n".format(chunnel)
 
-# curly brace = dictionary/sets; square bracket = list/array
-# a string type is returned, not a list / dictionary (print type(myStats) or print type(btcUsd))
-#myStats = coinmarketcap.stats()
-#marketCap = float(get_market_cap(myStats))
-#marketVol = float(get_market_vol(myStats))
-# 01 coin data
-session = Session()
-session.headers.update(more100_headers)
-response = session.get(more100_api_cmc503_cryptos, params=more100_params)
-more100_data=json.loads(response.text)
-get_coin_data_cmc503(more100_data, cable)
-
-print 
-print 
-print 
-# mine, global data
+# global data
 raw_data_cmc503_globs = requests.get(api_cmc503_globs).json()
 data_cmc503_globs = raw_data_cmc503_globs['data']
-print data_cmc503_globs
-print ("tot market cap=%10.2f" %((data_cmc503_globs['quote']['USD']['total_market_cap'])/1000000000))
-print ("tot volume 24h=%10.2f" %((data_cmc503_globs['quote']['USD']['total_volume_24h'])/1000000000))
-print 
-print 
+#print ("tot market cap=%10.2f" %((data_cmc503_globs['quote']['USD']['total_market_cap'])/1000000000))
+#print ("tot volume 24h=%10.2f" %((data_cmc503_globs['quote']['USD']['total_volume_24h'])/1000000000))
+marketCap=data_cmc503_globs['quote']['USD']['total_market_cap']
+marketVol=data_cmc503_globs['quote']['USD']['total_volume_24h']
 
 email_body += "market cap = ${:10.2f}B = {:}{:10.2f}B\n".format(marketCap/1000000000, gbpAscii, (marketCap/1000000000)/cable)
 email_body += "market vol = ${:10.2f}B = {:}{:10.2f}B (in the last 24h)\n".format(marketVol/1000000000, gbpAscii, (marketVol/1000000000)/cable)
@@ -344,15 +359,25 @@ sc6LossDictHardcode = { "ticker":"",
             "7days":float(0),
             "costBasisGbp":float(1520.84+15.01+14.61)}      # 6 small coins (sc6) that I lost money on in T7 (6 altcoins: omg, pay, bnb. bmt, lsk, iota)
 ###############################################
-get_price_from_cmc(btcDict, cable)
-get_price_from_cmc(ethDict, cable)
-get_price_from_cmc(xmrDict, cable)
-get_price_from_cmc(bchDict, cable)
-get_price_from_cmc(btgDict, cable)
-get_price_from_cmc(gasDict, cable)
-get_price_from_cmc(neoDict, cable)
-get_price_from_cmc(xrpDict, cable)
+#get_price_from_cmc(btcDict, cable)
+#get_price_from_cmc(ethDict, cable)
+#get_price_from_cmc(xmrDict, cable)
+#get_price_from_cmc(bchDict, cable)
+#get_price_from_cmc(btgDict, cable)
+#get_price_from_cmc(gasDict, cable)
+#get_price_from_cmc(neoDict, cable)
+#get_price_from_cmc(xrpDict, cable)
 # HARDCODED -- get_price_from_cmc(sc6DictHardcode, cable)
+
+# curly brace = dictionary/sets; square bracket = list/array
+# a dictionary is returned; this dictionary contains various elements, some of which are lists of dictionaries!
+# coin data
+session = Session()
+session.headers.update(more100_headers)
+response = session.get(more100_api_cmc503_cryptos, params=more100_params)
+more100_data=json.loads(response.text)
+get_coin_data_cmc503(btcDict, more100_data, cable)
+
 # create an array of crypto dictionaries (and the loss from sc6)
 arr = [btcDict, ethDict, xmrDict, xrpDict, bchDict, neoDict, btgDict, gasDict, sc6LossDictHardcode]
 
