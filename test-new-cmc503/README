@@ -1,0 +1,4 @@
+(1) create basic account on cmc and get API key for this account
+(2) cmc gmail allow less secure apps to sign in
+(3) need new python code for new cmc API
+(4) bitbucket now uses 2fa, so need an app passwd to access it

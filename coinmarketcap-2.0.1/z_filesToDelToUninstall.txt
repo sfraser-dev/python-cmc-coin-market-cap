@@ -1,0 +1,5 @@
+/usr/local/lib/python2.7/dist-packages/coinmarketcap/core.py
+/usr/local/lib/python2.7/dist-packages/coinmarketcap/__init__.py
+/usr/local/lib/python2.7/dist-packages/coinmarketcap/core.pyc
+/usr/local/lib/python2.7/dist-packages/coinmarketcap/__init__.pyc
+/usr/local/lib/python2.7/dist-packages/coinmarketcap-2.0.1.egg-info
