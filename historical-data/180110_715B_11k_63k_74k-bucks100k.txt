@@ -1,0 +1,36 @@
+date and time: 2018-01-10 15:28
+gbp/usd: 1.3518
+gbp/eur: 1.1329
+usd/gbp: 0.7398
+eur/gbp: 0.8827
+
+market cap = $    717.05B = £    530.44B
+market vol = $     51.66B = £     38.22B (in the last 24h)
+
+btc price = $  14298.50 = £  10577.38, 1hr=      2.12%, 24hrs=     -3.26%, 7days=     -5.36%
+eth price = $   1361.07 = £   1006.86, 1hr=      1.40%, 24hrs=     12.71%, 7days=     51.42%
+xmr price = $    394.26 = £    291.66, 1hr=      3.17%, 24hrs=     -7.25%, 7days=     -1.24%
+bch price = $   2737.88 = £   2025.36, 1hr=      7.34%, 24hrs=     13.39%, 7days=      0.93%
+btg price = $    236.25 = £    174.76, 1hr=      3.44%, 24hrs=     -2.11%, 7days=    -13.48%
+gas price = $     55.57 = £     41.11, 1hr=      0.05%, 24hrs=     -3.58%, 7days=     63.53%
+neo price = $    120.39 = £     89.06, 1hr=      1.95%, 24hrs=      1.14%, 7days=     26.37%
+xrp price = $      1.93 = £      1.43, 1hr=      2.89%, 24hrs=    -16.30%, 7days=    -33.66%
+sc6 price = $      0.00 = £      0.00, 1hr=      0.00%, 24hrs=      0.00%, 7days=      0.00%
+
+totValOf    2.01 btc = $  28779.75 = £  21289.95 (costBasis: £   2459.05, p/l: £  18830.90, roi:     765.78%, avgCostPerCoin: £   1221.72 ($   1651.52))
+totValOf   34.80 eth = $  47371.92 = £  35043.59 (costBasis: £   2217.25, p/l: £  32826.34, roi:    1480.50%, avgCostPerCoin: £     63.71 ($     86.12))
+totValOf   25.88 xmr = $  10203.44 = £   7548.04 (costBasis: £   2803.39, p/l: £   4744.65, roi:     169.25%, avgCostPerCoin: £    108.32 ($    146.43))
+totValOf    1.52 bch = $   4173.95 = £   3087.70 (costBasis: £      0.00, p/l: £   3087.70, roi:        inf%, avgCostPerCoin: £      0.00 ($      0.00))
+totValOf    1.72 btg = $    405.35 = £    299.86 (costBasis: £      0.00, p/l: £    299.86, roi:        inf%, avgCostPerCoin: £      0.00 ($      0.00))
+totValOf    3.06 gas = $    169.98 = £    125.74 (costBasis: £      0.00, p/l: £    125.74, roi:        inf%, avgCostPerCoin: £      0.00 ($      0.00))
+totValOf   70.31 neo = $   8464.74 = £   6261.83 (costBasis: £   1064.50, p/l: £   5197.33, roi:     488.24%, avgCostPerCoin: £     15.14 ($     20.47))
+totValOf  626.35 xrp = $   1210.06 = £    895.15 (costBasis: £   1300.00, p/l: £   -404.85, roi:     -31.14%, avgCostPerCoin: £      2.08 ($      2.81))
+totValOf    1.00 sc6 = $      0.00 = £      0.00 (costBasis: £   1550.46, p/l: £  -1550.46, roi:    -100.00%, avgCostPerCoin: £   1550.46 ($   2095.91))
+total overall purchase cost = £  11394.65 (calculated per tranche) ($  15403.29)
+total overall value         = £  74551.85 (calculated per tranche) ($ 100779.19)
+total overall p/l           = £  63157.20 (calculated per tranche) ($  85375.90)
+total overall roi =     554.27%
+
+cmc data: cap=$717.1B, vol=$51.7B, btc=£10577.38, eth=£1006.86, xmr=£291.66, bch=£2025.36, btg=£174.76, gas=£41.11, neo=£89.06, xrp=£1.43, sc6=£0.00
+email failure!
+email failure!

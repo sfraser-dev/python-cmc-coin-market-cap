@@ -1,0 +1,32 @@
+date and time: 2017-12-22 09:16
+gbp/usd: 1.3360
+gbp/eur: 1.1266
+usd/gbp: 0.7485
+eur/gbp: 0.8876
+
+market cap = $    504.70B = £    377.77B
+market vol = $     43.48B = £     32.55B (in the last 24h)
+
+btc price = $  13591.20 = £  10173.05, 1hr=      3.12%, 24hrs=    -20.06%, 7days=    -23.06%
+eth price = $    675.11 = £    505.32, 1hr=      5.37%, 24hrs=    -22.01%, 7days=      1.68%
+xmr price = $    326.26 = £    244.21, 1hr=      8.76%, 24hrs=    -28.97%, 7days=      6.80%
+bch price = $   2479.13 = £   1855.64, 1hr=      4.69%, 24hrs=    -31.72%, 7days=     42.39%
+btg price = $    324.22 = £    242.68, 1hr=      9.46%, 24hrs=    -26.68%, 7days=     10.32%
+neo price = $     55.08 = £     41.23, 1hr=      8.43%, 24hrs=    -26.43%, 7days=     22.01%
+sc6 price = $      0.00 = £      0.00, 1hr=      0.00%, 24hrs=      0.00%, 7days=      0.00%
+
+totValOf    2.01 btc = $  27356.23 = £  20476.22 (costBasis: £   2459.05, p/l: £  18017.17, roi:     732.69%, avgCostPerCoin: £   1221.71 ($   1632.21))
+totValOf   34.80 eth = $  23497.25 = £  17587.76 (costBasis: £   2217.25, p/l: £  15370.51, roi:     693.22%, avgCostPerCoin: £     63.71 ($     85.11))
+totValOf   25.88 xmr = $   8443.59 = £   6320.05 (costBasis: £   2803.39, p/l: £   3516.66, roi:     125.44%, avgCostPerCoin: £    108.32 ($    144.72))
+totValOf    1.52 bch = $   3779.48 = £   2828.95 (costBasis: £      0.00, p/l: £   2828.95, roi:        inf%, avgCostPerCoin: £      0.00 ($      0.00))
+totValOf    1.72 btg = $    556.31 = £    416.40 (costBasis: £      0.00, p/l: £    416.40, roi:        inf%, avgCostPerCoin: £      0.00 ($      0.00))
+totValOf   70.31 neo = $   3872.67 = £   2898.70 (costBasis: £   1064.50, p/l: £   1834.20, roi:     172.31%, avgCostPerCoin: £     15.14 ($     20.23))
+totValOf    1.00 sc6 = $      0.00 = £      0.00 (costBasis: £   1550.46, p/l: £  -1550.46, roi:    -100.00%, avgCostPerCoin: £   1550.46 ($   2071.41))
+total overall purchase cost = £  10094.65 (calculated per tranche)
+total overall value         = £  50528.08 (calculated per tranche)
+total overall p/l           = £  40433.43 (calculated per tranche)
+total overall roi =     400.54%
+
+cmc data: cap=$504.7B, vol=$43.5B, btc=£10173.05, eth=£505.32, xmr=£244.21, bch=£1855.64, btg=£242.68, neo=£41.23, sc6=£0.00
+email failure!
+email failure!

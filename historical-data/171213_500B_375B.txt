@@ -1,0 +1,30 @@
+date and time: 2017-12-13 12:10
+gbp/usd: 1.3360
+eur/gbp: 0.8807
+
+market cap = $  502.95B = £  376.46B
+market vol = $   38.82B = £   29.06B (in the last 24h)
+
+btc price = $17148.60 = £12835.78, 1hr=    0.90%, 24hrs=    1.08%, 7days=   33.01%
+eth price = $  675.71 = £  505.77, 1hr=    0.34%, 24hrs=   23.52%, 7days=   50.87%
+xmr price = $  330.35 = £  247.26, 1hr=    2.18%, 24hrs=   13.83%, 7days=   11.41%
+bch price = $ 1578.48 = £ 1181.50, 1hr=    0.23%, 24hrs=    3.48%, 7days=    6.42%
+btg price = $  278.38 = £  208.37, 1hr=   -0.50%, 24hrs=    6.66%, 7days=   -5.02%
+neo price = $   48.82 = £   36.54, 1hr=   10.32%, 24hrs=   30.98%, 7days=   31.20%
+sc6 price = $    0.00 = £    0.00, 1hr=    0.00%, 24hrs=    0.00%, 7days=    0.00%
+
+totValOf     2.01 btc = $34516.53 = £25835.72 (costBasis: £ 2459.05, p/l: £23376.67, roi:   950.64%, avgCostPerCoin: £ 1221.71 ($ 1632.21))
+totValOf    34.80 eth = $23518.03 = £17603.31 (costBasis: £ 2217.25, p/l: £15386.06, roi:   693.93%, avgCostPerCoin: £   63.71 ($   85.11))
+totValOf    25.88 xmr = $ 8549.28 = £ 6399.16 (costBasis: £ 2803.39, p/l: £ 3595.77, roi:   128.27%, avgCostPerCoin: £  108.32 ($  144.72))
+totValOf     1.52 bch = $ 2406.42 = £ 1801.21 (costBasis: £    0.00, p/l: £ 1801.21, roi:      inf%, avgCostPerCoin: £    0.00 ($    0.00))
+totValOf     1.72 btg = $  477.64 = £  357.52 (costBasis: £    0.00, p/l: £  357.52, roi:      inf%, avgCostPerCoin: £    0.00 ($    0.00))
+totValOf    70.31 neo = $ 3432.47 = £ 2569.21 (costBasis: £ 1064.50, p/l: £ 1504.71, roi:   141.35%, avgCostPerCoin: £   15.14 ($   20.23))
+totValOf     1.00 sc6 = $    0.00 = £    0.00 (costBasis: £ 1550.46, p/l: £-1550.46, roi:  -100.00%, avgCostPerCoin: £ 1550.46 ($ 2071.41))
+total overall purchase cost = £10094.65 (calculated per tranche)
+total overall value         = £54566.14 (calculated per tranche)
+total overall p/l           = £44471.49 (calculated per tranche)
+total overall roi =   440.55%
+
+cmc data: cap=$503.0B, vol=$38.8B, btc=£12835.78, eth=£505.77, xmr=£247.26, bch=£1181.50, btg=£208.37, neo=£36.54, sc6=£0.00
+email failure!
+email failure!
