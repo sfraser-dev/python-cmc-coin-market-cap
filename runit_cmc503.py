@@ -236,9 +236,21 @@ gasDict = { "slug":"gas",
             "7days":float(0),
             "costBasisGbp":float(0.00)}             # T8 (no cost, free from neon wallet)
 ###############################################
+bsvDict = { "slug":"bitcoin-sv",                        # UNCLAIMED: held BCH on ledger nano at the split, still need to claim BSV
+            "symbol":"bsv",
+            "abs":float(1.52451799),                    # UNCLAIMED BSV forked from BCH on 15 Nov 2018,
+            "usd":float(0),                             # for each bitcoin-cash (BCH), got 1 BSV
+            "gbp":float(0),
+            "curvalUsd":float(0),
+            "curvalGbp":float(0),
+            "1hr":float(0),
+            "24hrs":float(0),
+            "7days":float(0),
+            "costBasisGbp":float(0.00)}                 # UNCLAIMED (no cost, free from BCH split)
+###############################################
 sc6LossDictHardcode = { "slug":"",
-            "symbol":"sc6",
-            "abs":float(1),
+            "symbol":"sc6",                             # HARDCODED: 6 small coins (sc6) that I lost money on in T7
+            "abs":float(1),                             # (6 altcoins: omg, pay, bnb. bmt, lsk, iota)
             "usd":float(0),
             "gbp":float(0),
             "curvalUsd":float(0),
@@ -246,7 +258,7 @@ sc6LossDictHardcode = { "slug":"",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(1520.84+15.01+14.61)}      # 6 small coins (sc6) that I lost money on in T7 (6 altcoins: omg, pay, bnb. bmt, lsk, iota)
+            "costBasisGbp":float(1520.84+15.01+14.61)}  # HARDCODED
 ###############################################
 
 # curly brace = dictionary/sets; square bracket = list/array
@@ -259,15 +271,16 @@ more100_data=json.loads(response.text)
 cmc503_get_coin_data(btcDict, more100_data, cable)
 cmc503_get_coin_data(ethDict, more100_data, cable)
 cmc503_get_coin_data(xmrDict, more100_data, cable)
+cmc503_get_coin_data(xrpDict, more100_data, cable)
 cmc503_get_coin_data(bchDict, more100_data, cable)
+cmc503_get_coin_data(neoDict, more100_data, cable)
 cmc503_get_coin_data(btgDict, more100_data, cable)
 cmc503_get_coin_data(gasDict, more100_data, cable)
-cmc503_get_coin_data(neoDict, more100_data, cable)
-cmc503_get_coin_data(xrpDict, more100_data, cable)
+cmc503_get_coin_data(bsvDict, more100_data, cable)
 # HARDCODED -- cmc503_get_coin_data(sc6DictHardcode, more100_data, cable)
 
 # create an array of crypto dictionaries (and the loss from sc6)
-arr = [btcDict, ethDict, xmrDict, xrpDict, bchDict, neoDict, btgDict, gasDict, sc6LossDictHardcode]
+arr = [btcDict, ethDict, xmrDict, xrpDict, bchDict, neoDict, btgDict, gasDict, bsvDict, sc6LossDictHardcode]
 
 totalUsd = float(0)
 totalGbp = float(0)
