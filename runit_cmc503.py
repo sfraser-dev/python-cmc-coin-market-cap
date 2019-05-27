@@ -224,7 +224,8 @@ btgDict = { "slug":"bitcoin-gold",
             "24hrs":float(0),
             "7days":float(0),
             "costBasisGbp":float(0.00)}             # T8 (no cost, free from blockchain split)
-gasDict = { "slug":"gas",
+###############################################
+gasDict = { "slug":"gas",                               # UNCLAIMED (free from neon (neo) wallet)
             "symbol":"gas",
             "abs":float(3.0585122),
             "usd":float(0),
@@ -234,7 +235,7 @@ gasDict = { "slug":"gas",
             "1hr":float(0),
             "24hrs":float(0),
             "7days":float(0),
-            "costBasisGbp":float(0.00)}             # T8 (no cost, free from neon wallet)
+            "costBasisGbp":float(0.00)}                 # UNCLAIMED (no cost)
 ###############################################
 bsvDict = { "slug":"bitcoin-sv",                        # UNCLAIMED: held BCH on ledger nano at the split, still need to claim BSV
             "symbol":"bsv",
